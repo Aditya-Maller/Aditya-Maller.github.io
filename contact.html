@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&family=Mulish&display=swap">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/Utils.css">
+    <title>Contact - Aditya S Maller's Personal Website</title>
+    <style>
+        /* Add your custom styles here */
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+            background-color: rgb(251, 250, 197);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh; /* Set a minimum height to ensure space for the footer */
+        }
+
+        .contact-left {
+            width: 100%;
+            max-width: 600px; /* Limit the width of the form for better readability */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .contact-inputs,
+        button {
+            width: 100%;
+        }
+
+        button {
+            background-color: #eff294;
+            color: #000;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background-color: #cbd98d;
+            color: #000;
+        }
+
+        .contact-right img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .footer {
+            background-color: black;
+            color: gold;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            padding: 20px;
+            margin-top: 20px; /* Add margin to separate the footer from the content */
+        }
+
+        .footer-info,
+        .footer-social {
+            margin-bottom: 10px;
+        }
+
+        .footer-social a {
+            margin-left: 10px;
+        }
+
+        /* Add this in your existing CSS file */
+        @media only screen and (max-width: 768px) {
+            .contact-container {
+                height: auto;
+            }
+
+            .contact-left,
+            .contact-right {
+                width: 100%;
+            }
+
+            .contact-right img {
+                height: auto;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content max-width-1 m-auto">
+        <div class="contact-container">
+            <form action="https://api.web3forms.com/submit" method="POST" class="contact-left">
+                <div class="contact-left-title">
+                    <h1>Contact Aditya S Maller</h1>
+                    <hr>
+                </div>
+                <input type="hidden" name="access_key" value="fbaa47d4-2adc-49f5-a96e-12bf2a1afb88">
+                <input type="text" name="name" placeholder="Your Name" class="contact-inputs" required>
+                <input type="email" name="email" placeholder="Your Email" class="contact-inputs" required>
+                <textarea type="message" placeholder="Your message to Aditya S Maller" class="contact-inputs" required></textarea>
+                <button type="submit">Submit<img src="C:\Users\adity\Desktop\Sem 1 SEE practice\Img\arrow_icon.png" alt=""></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer max-width-2 m-auto">
+        <div class="footer-info">
+            <p>📞 Phone: +91 9141072165ㅤㅤㅤ</p>
+            <p>📧 Email: adityamaller001@gmail.com</p>
+        </div>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/emperor_adi1?igsh=em0xMW1veGg5YmFn" target="_blank" rel="noopener noreferrer">
+                📷 <!-- Instagram -->
+            </a>
+            <a href="www.linkedin.com/in/aditya-s-maller-851895292" target="_blank" rel="noopener noreferrer">
+                🔗 <!-- LinkedIn -->
+            </a>
+            <a href="https://github.com/Aditya-Maller" target="_blank" rel="noopener noreferrer">
+                💻 <!-- GitHub -->
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
+

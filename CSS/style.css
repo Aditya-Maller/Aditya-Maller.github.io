@@ -1,0 +1,340 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.navigation {
+    font-family: var(--font1);
+    height: 74px;
+    /*background-color: red;*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-left{
+    font-size: 20px;
+    display: flex;
+}
+.nav-left ul li{
+    list-style: none;
+    margin: 0 14px;
+    font-family: var(--font2);
+}
+.nav-left ul li:hover{
+    font-weight: bolder;
+    background-color: rgb(255, 249, 243);
+    transition: background-color 0.6s, color 0.6s, transform 0.6s;
+}
+.nav-left ul li a:hover{
+    font-weight: bolder;
+    background-color: rgb(245, 237, 227);
+    transition: background-color 0.6s, color 0.6s, transform 0.6s;
+}
+.nav-left ul{
+    display: flex;
+    align-items: center;
+    margin: 0 77px;
+    font-size: 18px;
+}
+.nav-left ul li a{
+    text-decoration: none;
+    color: black;
+}
+.nav-right{
+
+}
+.content {
+    height: 395px;
+    background-color: rgb(251, 250, 197);
+    display: flex;
+    margin-top: 32px;
+    padding: 14px;
+}
+.content-left{
+    font-family: var(--font1);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.content-right{
+    width:50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content-right img{
+    height: 395px;
+    width: 305px;
+    border: 2px solid black;
+    border-radius: 200px;
+}
+.footer {
+    height: 50px;
+    background-color: blueviolet;
+}
+hr.thick {
+    height: 3px;
+    border: none;
+    background-color: #333;
+    margin: 5px 0;
+}
+.home-articles{
+    height: 620px;
+    background-color: rgb(251, 250, 197);
+}
+.home-article{}
+/*.home-articles{}*/
+.footer{
+    height: 50px;
+    background-color: var(--main-bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-direction: column;
+}
+/* Add this in your existing CSS file */
+
+.text-center {
+    text-align: center;
+}
+.project-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.project {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.project-img {
+    width: 300px; /* Adjust the width to your preference */
+    height: 200px; /* Adjust the height to your preference */
+    object-fit: cover;
+}
+
+.project:hover {
+    transform: scale(1.1);
+}
+
+.project:active {
+    transform: scale(0.9);
+}
+
+/* Add this in your existing CSS file */
+
+@media only screen and (max-width: 768px) {
+    .navigation {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .nav-left ul {
+        margin: 15px 0;
+    }
+
+    .nav-left ul li {
+        margin: 8px 0;
+    }
+
+    .nav-right {
+        margin-top: 15px;
+    }
+
+    .content {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .content-left,
+    .content-right {
+        width: 100%;
+    }
+
+    .content-right img {
+        width: 100%;
+        height: auto;
+    }
+
+    .home-articles,
+    .footer {
+        max-width: 100%;
+    }
+}
+/* Add this in your existing CSS file */
+
+.footer {
+    background-color: black;
+    color: gold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.footer-info,
+.footer-social {
+    display: flex;
+}
+
+.footer-social a {
+    margin-left: 10px;
+}
+
+/* Add this in your existing CSS file */
+
+.project-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: space-around;
+    height: auto; /* Change height to auto */
+}
+
+.project {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-description {
+    margin-top: 10px; /* Adjust the margin as needed */
+}
+
+.project:hover {
+    transform: scale(1.1);
+}
+
+.project:active {
+    transform: scale(0.9);
+}
+/* Add this in your existing CSS file */
+
+@media only screen and (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .footer-info,
+    .footer-social {
+        margin-bottom: 10px;
+    }
+}
+/* Add this in your existing CSS file */
+
+.home-articles {
+    height: auto;
+    overflow: auto; /* Add overflow property to handle content overflow */
+}
+
+.project-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: space-around;
+}
+
+/* Adjust the height of .home-articles for better responsiveness */
+@media only screen and (max-width: 768px) {
+    .home-articles {
+        height: auto;
+    }
+}
+/* Add this in your existing CSS file */
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-left ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px; /* Adjust the top distance */
+        left: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        padding: 10px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+
+    .nav-left ul.show {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-left ul li {
+        margin: 10px 0;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .content-left,
+    .content-right {
+        width: 100%;
+    }
+
+    .content-right img {
+        width: 100%;
+        height: auto;
+    }
+
+    .home-articles,
+    .footer {
+        max-width: 100%;
+        padding: 20px; /* Add some padding for spacing on smaller screens */
+    }
+
+    .nav-list {
+        flex-direction: column; /* Display the navigation list vertically on smaller screens */
+        text-align: center; /* Center align the navigation items */
+        margin-top: 10px; /* Add some margin at the top for spacing */
+    }
+
+    .nav-right {
+        margin-top: 10px; /* Add some margin at the top for spacing */
+    }
+}
+.contact-container{
+    height: 31vh;
+    display: flex;
+    align-items: center;
+    justify-items: space-evenly;
+}
+.contact-left{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+}

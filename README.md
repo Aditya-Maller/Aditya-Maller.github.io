@@ -10,7 +10,7 @@ The name keeps the Greek deity convention while making the repository purpose ex
 - Light and dark themes with system-theme detection and a manual toggle.
 - Polished UI details: soft surfaces, subtle shadows, hover states, semantic section icons, rounded media frames, compact action chips, and mobile-safe typography.
 - Publication analytics generated from `src/content/publications.js`: yearly count, research area distribution, publication type, venue family, selected papers, and open artifacts.
-- Publication and project cards with featured figures, tags, artifact links, inferred action icons, optional GitHub star/fork badges, and grouped paper sections.
+- Publication cards with featured figures, grouped paper sections, and a horizontally scrollable project rail that supports any number of projects.
 - Configurable sections for news, projects, teaching, talks, education, experience, awards, and academic service.
 - SEO and social preview metadata injected from `src/content/site.js`.
 - GitHub Pages deployment workflow included.
@@ -61,6 +61,8 @@ If you deploy to a custom domain, set `siteMeta.url` in `src/content/site.js` to
 
 Editable content lives in `src/content/`. In normal use, this is the only folder you edit for data and copy.
 
+The complete field-by-field reference is in [`src/content/README.md`](src/content/README.md). It documents every exported content object, publication grouping and card selection, rich text fragments, link options, image paths, and WebP generation.
+
 - `site.js`: brand, SEO metadata, repository link, section order, section labels, section visibility, and publication group order.
 - `profile.js`: identity, affiliation, contact links, research focus, and about paragraphs.
 - `publications.js`: papers, venues, years, groups, links, tags, selected publication flags, and optional images.
@@ -75,6 +77,19 @@ Recommended fill order:
 4. Optional activity files
 
 Publication charts are computed automatically from `publications.js`.
+
+### Publication groups and card sizes
+
+Each paper needs a `group` string. Groups are matched by exact text and rendered in the preferred order from `publicationGroups` in `src/content/site.js`. A group used by a paper but omitted from `publicationGroups` is still shown after the preferred groups. Papers without a group are not rendered in the publication section.
+
+`featured` alone determines the publication layout:
+
+- `featured: true` renders the large publication card.
+- Missing or false `featured` renders the compact publication row.
+- A featured paper may omit `image`; the card then shows a generated text placeholder.
+- `image` does not make a paper featured. Compact rows do not render publication images.
+
+Featured papers are shown before compact papers inside each group. Array order is preserved within those two sets.
 
 Section order, titles, navigation labels, small notes, and visibility are all controlled by the single `sections` array in `src/content/site.js`, so there is no separate nav list to keep in sync.
 
@@ -93,10 +108,46 @@ Put all site images in `public/images/`. This keeps image paths easy to find and
 Recommended layout:
 
 - Profile photo: `public/images/avatar.webp`, then set `profile.avatar` in `src/content/profile.js`.
-- Publication figures: `public/images/<paper-slug>.png` or `.webp`, then set `image` in `src/content/publications.js`.
+- Publication figures: `public/images/<paper-slug>.png` plus a same-name `.webp`, or one standalone `.svg`/`.webp`, then set `image` in `src/content/publications.js`.
 - Social preview image and favicon assets: keep them in `public/images/` and reference them from `src/content/site.js` or `index.html`.
 
 Use paths without a leading slash, for example `images/avatar.webp`. That keeps both `USERNAME.github.io` deployments and project-page demos working.
+
+Publication figures use a `16:9` frame with `object-fit: contain`, so a `16:9` source usually gives the cleanest result.
+
+### PNG/JPEG and WebP pairs
+
+When a publication `image` ends in `.png`, `.jpg`, or `.jpeg`, Athena automatically requests a same-name `.webp` first and keeps the original file as the fallback:
+
+```js
+image: "images/my-paper.png"
+```
+
+Both files should exist:
+
+```text
+public/images/my-paper.png
+public/images/my-paper.webp
+```
+
+A missing WebP can appear as a broken image in browsers that select the WebP source. Do not delete the original PNG/JPEG; it remains the compatibility fallback.
+
+Generate the WebP with `cwebp`:
+
+```bash
+# macOS, one-time install
+brew install webp
+
+cwebp -q 90 public/images/my-paper.png -o public/images/my-paper.webp
+```
+
+Or use ImageMagick:
+
+```bash
+magick public/images/my-paper.png -quality 90 public/images/my-paper.webp
+```
+
+If `image` points directly to `.webp` or `.svg`, Athena uses that file as-is and does not look for another format.
 
 For favicon generation, the AcadHomepage template recommends [redketchup favicon-generator](https://redketchup.io/favicon-generator). Generate the favicon package there, then copy the needed outputs into `public/images/`.
 
@@ -106,13 +157,13 @@ Publication and project link icons are inferred from labels. These labels work o
 
 `Paper`, `Code`, `Dataset`, `Demo`, `Slides`, `Video`, `DOI`, `BibTeX`, `Poster`, `Documentation`, `Project`, and `Download`.
 
-For GitHub repository links, add numeric `stars` and `forks` fields when you want reliable fallback badges without depending on the GitHub API:
+For GitHub repository links, add a numeric `stars` field when you want a reliable fallback badge without depending on the GitHub API:
 
 ```js
-{ label: "Code", href: "https://github.com/owner/repo", stars: 128, forks: 24 }
+{ label: "Code", href: "https://github.com/owner/repo", stars: 128 }
 ```
 
-Fallback counts render immediately. Repository badges refresh from the GitHub API after the initial page load when the persistent browser cache is missing or stale, and keep the last successful cached value when anonymous GitHub API requests are rate-limited.
+The fallback star count renders immediately. The badge refreshes from the GitHub API after the initial page load when the persistent browser cache is missing or stale, and keeps the last successful cached value when anonymous GitHub API requests are rate-limited. Fork counts are not displayed.
 
 By default, GitHub stats only appear on repository-style links such as `Code`, `GitHub`, `Repo`, or `Repository`. Release, documentation, and demo links stay clean unless you set `showGithubStats: true`.
 
@@ -137,7 +188,7 @@ Then check:
 
 - The profile sidebar shows the right name, role, email, location, links, and avatar.
 - Every publication link opens correctly.
-- Publication figures load from `public/images/`.
+- Publication figures load from `public/images/`; every PNG/JPEG figure has its same-name WebP file.
 - The top navigation scrolls to the expected sections.
 - Light and dark mode both look correct.
 - Mobile layout is readable.

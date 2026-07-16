@@ -445,7 +445,7 @@ function PublicationMeta({ paper, compact = false }) {
 
 function ProjectList({ items, githubStats }) {
   return (
-    <div className="project-grid">
+    <div className="project-grid" role="region" aria-label="Projects" tabIndex={0}>
       {items.map((project) => (
         <article className="project-card" key={project.title}>
           <div className="project-card-head">
@@ -537,22 +537,14 @@ function ActionLinks({ links, githubStats = {} }) {
 }
 
 function GithubRepoStats({ stats }) {
-  if (!stats || (typeof stats.stars !== "number" && typeof stats.forks !== "number")) return null;
+  if (!stats || typeof stats.stars !== "number") return null;
 
   return (
     <span className="repo-stats">
-      {typeof stats.stars === "number" ? (
-        <span className="repo-stat" title={`${stats.stars.toLocaleString()} GitHub stars`}>
-          <i className="fa-solid fa-star" aria-hidden="true" />
-          {formatGithubCount(stats.stars)}
-        </span>
-      ) : null}
-      {typeof stats.forks === "number" ? (
-        <span className="repo-stat" title={`${stats.forks.toLocaleString()} GitHub forks`}>
-          <i className="fa-solid fa-code-fork" aria-hidden="true" />
-          {formatGithubCount(stats.forks)}
-        </span>
-      ) : null}
+      <span className="repo-stat" title={`${stats.stars.toLocaleString()} GitHub stars`}>
+        <i className="fa-solid fa-star" aria-hidden="true" />
+        {formatGithubCount(stats.stars)}
+      </span>
     </span>
   );
 }
@@ -750,10 +742,7 @@ function useGithubRepoStats(collections) {
               return null;
             }
             const data = await response.json();
-            const stats = normalizeGithubStats({
-              stars: data.stargazers_count,
-              forks: data.forks_count
-            });
+            const stats = normalizeGithubStats({ stars: data.stargazers_count });
             if (!stats) return null;
             writeGithubStatsCache(repo, stats);
             return [repo, stats];
@@ -821,10 +810,7 @@ function readGithubStatsCacheStorage(storageName, key) {
   try {
     const storage = window[storageName];
     const cached = JSON.parse(storage.getItem(key));
-    const stats = normalizeGithubStats({
-      stars: cached?.stars ?? cached?.count,
-      forks: cached?.forks
-    });
+    const stats = normalizeGithubStats({ stars: cached?.stars ?? cached?.count });
     const updatedAt = Number(cached?.updatedAt ?? cached?.timestamp);
     const checkedAt = Number(cached?.checkedAt ?? updatedAt);
     if (!stats || !Number.isFinite(updatedAt) || !Number.isFinite(checkedAt)) return null;
@@ -859,28 +845,16 @@ function shouldShowGithubStats(link) {
 }
 
 function getGithubStatsFallback(link) {
-  return normalizeGithubStats({
-    stars: link.stars,
-    forks: link.forks
-  });
+  return normalizeGithubStats({ stars: link.stars });
 }
 
 function mergeGithubStats(liveStats, fallbackStats) {
-  return normalizeGithubStats({
-    stars: liveStats?.stars ?? fallbackStats?.stars,
-    forks: liveStats?.forks ?? fallbackStats?.forks
-  });
+  return normalizeGithubStats({ stars: liveStats?.stars ?? fallbackStats?.stars });
 }
 
 function normalizeGithubStats(stats) {
-  const normalized = {};
   const stars = Number(stats?.stars);
-  const forks = Number(stats?.forks);
-
-  if (Number.isFinite(stars)) normalized.stars = stars;
-  if (Number.isFinite(forks)) normalized.forks = forks;
-
-  return Object.keys(normalized).length ? normalized : null;
+  return Number.isFinite(stars) ? { stars } : null;
 }
 
 function getGithubRepo(href) {

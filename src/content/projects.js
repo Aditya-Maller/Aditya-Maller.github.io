@@ -6,7 +6,7 @@ export const projects = [
       "A reusable research software project with documentation, reproducible examples, releases, and an academic artifact trail.",
     tags: ["Research Software", "Reproducibility", "Documentation"],
     links: [
-      { label: "Code", href: "https://github.com/example/open-research-toolkit", stars: 128, forks: 24 },
+      { label: "Code", href: "https://github.com/example/open-research-toolkit", stars: 128 },
       { label: "Release", href: "https://github.com/example/open-research-toolkit/releases" }
     ]
   },
@@ -17,7 +17,7 @@ export const projects = [
       "An interactive project page for dataset cards, benchmark splits, model outputs, and reproducibility notes.",
     tags: ["Dataset", "Benchmark", "Demo"],
     links: [
-      { label: "Code", href: "https://github.com/example/dataset-explorer", stars: 64, forks: 9 },
+      { label: "Code", href: "https://github.com/example/dataset-explorer", stars: 64 },
       { label: "Demo", href: "https://example.com/dataset-explorer" }
     ]
   },

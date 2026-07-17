@@ -106,9 +106,19 @@ function App() {
 
   return (
     <>
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <header className="site-header">
         <a className="brand" href="#about" aria-label={`${siteMeta.brand} home`}>
-          {siteMeta.brand}
+          <img
+            src="images/athena-mark.svg"
+            width="30"
+            height="30"
+            alt=""
+            aria-hidden="true"
+          />
+          <span>{siteMeta.brand}</span>
         </a>
         <nav className={`primary-nav ${menuOpen ? "is-open" : ""}`} aria-label="Primary navigation">
           {navItems.map((item) => (
@@ -145,7 +155,7 @@ function App() {
           <SidebarProfile />
         </aside>
 
-        <main className="content-main">
+        <main className="content-main" id="main-content">
           {visibleSections.map((section) => {
             const content = sectionContent[section.id];
             if (!content) return null;

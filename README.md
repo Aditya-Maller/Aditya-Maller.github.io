@@ -5,6 +5,8 @@
   <p>
     <a href="https://aaronz345.github.io/Athena-personal-academic-page/"><strong>View the live demo ↗</strong></a>
     &nbsp;·&nbsp;
+    <a href="https://github.com/new?template_name=Athena-personal-academic-page&template_owner=AaronZ345"><strong>Use this template ↗</strong></a>
+    &nbsp;·&nbsp;
     <a href="src/content/README.md">Content guide</a>
     &nbsp;·&nbsp;
     <a href="#deploy-with-github-pages">Deployment</a>
@@ -40,7 +42,7 @@ Section order, navigation labels, notes, and visibility are controlled from one 
 
 ### 1. Create your site
 
-Fork this repository. For a root GitHub Pages site, rename the fork to `USERNAME.github.io`.
+Click [Use this template](https://github.com/new?template_name=Athena-personal-academic-page&template_owner=AaronZ345) to create a clean repository without Athena's commit history. For a root GitHub Pages site, name it `USERNAME.github.io`.
 
 ```bash
 git clone https://github.com/USERNAME/USERNAME.github.io.git
@@ -74,6 +76,8 @@ Most users only need to edit `src/content/` and add images to `public/images/`.
 | `src/content/awards.js`, `services.js` | Honors and academic service |
 
 The [content reference](src/content/README.md) documents every field, including publication grouping, rich text fragments, card selection, image paths, and project layout.
+
+For a first publish, start with `profile.js`, `publications.js`, and `site.js`. The remaining sections can stay as examples or be disabled from the `sections` array until you need them.
 
 ## Publications
 

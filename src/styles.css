@@ -338,10 +338,34 @@ input {
   font: inherit;
 }
 
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(36, 90, 150, 0.22);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--panel-bg);
+  font-weight: 560;
+  padding: 9px 13px;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .section {
   width: 100%;
   margin: 0;
   padding: 30px 0;
+  scroll-margin-top: 76px;
 }
 
 .site-header {
@@ -359,10 +383,22 @@ input {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-display);
   color: var(--ink);
-  font-weight: 500;
+  font-weight: 560;
   font-size: 0.94rem;
+}
+
+.brand img {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--panel-bg);
+  padding: 3px;
 }
 
 .brand:hover,
@@ -695,10 +731,14 @@ input {
 }
 
 .intro-copy {
-  max-width: 920px;
+  max-width: 880px;
+  border-left: 3px solid var(--blue-bright);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: linear-gradient(90deg, var(--blue-soft), transparent 72%);
   color: var(--body-copy);
   font-size: 0.94rem;
   line-height: 1.72;
+  padding: 18px 22px;
 }
 
 .intro-copy p {
@@ -1688,6 +1728,12 @@ a.timeline-place:hover {
   }
 }
 
+@media (max-width: 1120px) and (min-width: 861px) {
+  .brand span {
+    display: none;
+  }
+}
+
 @media (max-width: 860px) {
   html {
     scroll-behavior: auto;
@@ -1766,8 +1812,23 @@ a.timeline-place:hover {
 }
 
 @media (max-width: 520px) {
+  .brand {
+    min-width: 0;
+  }
+
+  .brand span {
+    max-width: min(42vw, 164px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .section {
     padding: 24px 0;
+  }
+
+  .intro-copy {
+    padding: 16px 17px;
   }
 
   .sidebar-card {

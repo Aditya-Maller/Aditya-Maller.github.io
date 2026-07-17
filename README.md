@@ -9,12 +9,6 @@
     &nbsp;·&nbsp;
     <a href="#deploy-with-github-pages">Deployment</a>
   </p>
-  <p>
-    <a href="https://github.com/AaronZ345/Athena-personal-academic-page/actions/workflows/pages.yml"><img src="https://img.shields.io/github/actions/workflow/status/AaronZ345/Athena-personal-academic-page/pages.yml?branch=main&label=deploy&style=flat-square" alt="GitHub Pages deployment" /></a>
-    <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19-149ECA?style=flat-square&logo=react&logoColor=white" alt="React 19" /></a>
-    <a href="https://vite.dev/"><img src="https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite 7" /></a>
-    <a href="LICENSE"><img src="https://img.shields.io/github/license/AaronZ345/Athena-personal-academic-page?style=flat-square" alt="MIT license" /></a>
-  </p>
 </div>
 
 <a href="https://aaronz345.github.io/Athena-personal-academic-page/">

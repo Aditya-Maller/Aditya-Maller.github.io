@@ -2,18 +2,20 @@ import { useEffect, useMemo, useState } from "react";
 import { Icon } from "@iconify/react";
 import {
   awards,
+  competitions,
   education,
+  entrepreneurship,
   experience,
+  leadership,
   news,
   profile,
   projects,
+  publicGood,
   publicationGroups,
   publications,
-  services,
+  references,
   sections,
-  siteMeta,
-  talks,
-  teaching
+  siteMeta
 } from "./content/index.js";
 import {
   fallbackTitleIcon,
@@ -22,68 +24,14 @@ import {
   profileIconMap,
   publicationGroupIconMap,
   sectionIconMap,
-  serviceIconMap,
   statusIconMap,
   venueIcon
 } from "./icons.js";
 
-const chartColors = ["#245a96", "#5c9ec6", "#7a8f36", "#b66f36", "#7b6fb3", "#3f8b78", "#b75d69"];
-const githubStatsCacheTtl = 1000 * 60 * 5;
-
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState(getInitialTheme);
-  const githubStatsSources = useMemo(() => [publications, projects], []);
-  const githubStats = useGithubRepoStats(githubStatsSources);
-  const stats = useMemo(() => getPublicationStats(publications), []);
-  const groups = useMemo(() => getPublicationGroups(publications, publicationGroups), []);
-  const visibleSections = useMemo(() => sections.filter((section) => section.enabled !== false), []);
-  const navItems = useMemo(
-    () => visibleSections
-      .filter((section) => section.nav !== false)
-      .map((section) => ({ href: `#${section.id}`, label: section.nav ?? section.title })),
-    [visibleSections]
-  );
-
-  const sectionContent = {
-    about: (
-      <div className="intro-copy">
-        {profile.about.map((paragraph, index) => (
-          <p key={index}>{renderRichText(paragraph)}</p>
-        ))}
-      </div>
-    ),
-    metrics: <MetricsDashboard stats={stats} />,
-    news: (
-      <div className="news-list">
-        {news.map((item) => (
-          <a className="news-row" href={item.href} key={`${item.date}-${item.text}`} target="_blank" rel="noreferrer">
-            <time>{item.date}</time>
-            <span className="news-icon" aria-hidden="true">
-              <SemanticIcon icon={newsIconMap[item.icon] ?? newsIconMap.accepted} />
-            </span>
-            <span className="news-text">{item.text}</span>
-            <i className="news-external fa-solid fa-arrow-up-right-from-square" aria-hidden="true" />
-          </a>
-        ))}
-      </div>
-    ),
-    publications: groups.map((group) => (
-      <PublicationGroup
-        key={group}
-        title={group}
-        papers={publications.filter((paper) => paper.group === group)}
-        githubStats={githubStats}
-      />
-    )),
-    projects: <ProjectList items={projects} githubStats={githubStats} />,
-    teaching: <Timeline items={teaching} />,
-    talks: <Timeline items={talks} />,
-    education: <Timeline items={education} />,
-    experience: <Timeline items={experience} />,
-    awards: <HonorsList items={awards} />,
-    service: <ServiceList items={services} />
-  };
+  const [activeTab, setActiveTab] = useState(getInitialHash);
 
   useEffect(() => {
     document.title = siteMeta.title;
@@ -95,34 +43,45 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = (event) => {
-      setTheme(event.matches ? "dark" : "light");
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        setActiveTab(hash);
+      }
     };
-
-    media.addEventListener("change", handleChange);
-    return () => media.removeEventListener("change", handleChange);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
+
+  const navItems = useMemo(
+    () => sections.map((section) => ({ id: section.id, href: `#${section.id}`, label: section.nav })),
+    []
+  );
 
   return (
     <>
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
+
+      {/* Header Bar */}
       <header className="site-header">
-        <a className="brand" href="#about" aria-label={`${siteMeta.brand} home`}>
-          <img
-            src="images/athena-mark.svg"
-            width="30"
-            height="30"
-            alt=""
-            aria-hidden="true"
-          />
+        <a className="brand" href="#hero" onClick={() => setActiveTab("hero")} aria-label="Aditya S Maller home">
+          <div className="brand-badge">ASM</div>
           <span>{siteMeta.brand}</span>
+          <span className="brand-affiliation">SPIRE Lab — IISc</span>
         </a>
         <nav className={`primary-nav ${menuOpen ? "is-open" : ""}`} aria-label="Primary navigation">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
+            <a
+              key={item.href}
+              href={item.href}
+              className={activeTab === item.id ? "active" : ""}
+              onClick={() => {
+                setActiveTab(item.id);
+                setMenuOpen(false);
+              }}
+            >
               {item.label}
             </a>
           ))}
@@ -132,9 +91,8 @@ function App() {
             className="theme-button"
             type="button"
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            aria-pressed={theme === "dark"}
             title={theme === "dark" ? "Light mode" : "Dark mode"}
-            onClick={() => setTheme((currentTheme) => currentTheme === "dark" ? "light" : "dark")}
+            onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
           >
             <i className={theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon"} aria-hidden="true" />
           </button>
@@ -142,8 +100,7 @@ function App() {
             className="menu-button"
             type="button"
             aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((value) => !value)}
+            onClick={() => setMenuOpen((v) => !v)}
           >
             <i className={menuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"} aria-hidden="true" />
           </button>
@@ -151,36 +108,106 @@ function App() {
       </header>
 
       <div className="page-shell">
-        <aside className="profile-sidebar" aria-label="Profile">
+        {/* Sidebar Profile Card */}
+        <aside className="profile-sidebar" aria-label="Profile Card">
           <SidebarProfile />
         </aside>
 
+        {/* Main Content Area */}
         <main className="content-main" id="main-content">
-          {visibleSections.map((section) => {
-            const content = sectionContent[section.id];
-            if (!content) return null;
+          {/* 1. Hero / Executive Overview Section */}
+          <section className="section hero-section" id="hero">
+            <ExecutiveHero />
+          </section>
 
-            return (
-              <section className={`section${section.id === "about" ? " about-section" : ""}`} id={section.id} key={section.id}>
-                <SectionTitle title={section.title} note={section.note} />
-                {content}
-              </section>
-            );
-          })}
+          {/* 2. Technical Snapshot (Grouped Skills) */}
+          <section className="section snapshot-section" id="snapshot">
+            <SectionTitle title="Technical Snapshot" note="Core engineering capabilities, model domains, and production technology stack." />
+            <TechnicalSnapshot />
+          </section>
+
+          {/* 3. Key Evidence Highlights */}
+          <section className="section highlights-section" id="highlights">
+            <SectionTitle title="Key Evidence Highlights" note="Strongest empirical research findings, engineered systems, and affiliations." />
+            <EvidenceHighlights />
+          </section>
+
+          {/* 4. Research & Publications */}
+          <section className="section publications-section" id="publications">
+            <SectionTitle title="Research & Publications" note="Peer-reviewed paper publications, preprints, and empirical evaluation metrics." />
+            <PublicationsList />
+          </section>
+
+          {/* 5. Engineered Systems / Projects */}
+          <section className="section projects-section" id="projects">
+            <SectionTitle title="Engineered Systems & Projects" note="Full-stack AI architectures, production backend pipelines, and system benchmarks." />
+            <ProjectsList />
+          </section>
+
+          {/* 6. Experience & Internships */}
+          <section className="section experience-section" id="experience">
+            <SectionTitle title="Research & Experience" note="Academic research roles and professional engineering internships." />
+            <ExperienceTimeline />
+          </section>
+
+          {/* 7. Leadership & Organization Building */}
+          <section className="section leadership-section" id="leadership">
+            <SectionTitle title="Leadership & Community" note="Founding Vice President of RUDRA (Data Science Club), event hosting, and community mentorship." />
+            <LeadershipList />
+          </section>
+
+          {/* 8. Competitions & Hackathons */}
+          <section className="section competitions-section" id="competitions">
+            <SectionTitle title="Competitions & Hackathons" note="Awards, hackathon wins, CTFs, and competitive data analysis results." />
+            <CompetitionsGrid />
+          </section>
+
+          {/* 9. Public Good & Accessibility */}
+          <section className="section public-good-section" id="public-good">
+            <SectionTitle title="Public Good & Accessibility" note="Assistive technology for visual impairment and public STEM educational outreach." />
+            <PublicGoodList />
+          </section>
+
+          {/* 10. Entrepreneurship */}
+          <section className="section entrepreneurship-section" id="entrepreneurship">
+            <SectionTitle title="Entrepreneurship & Product Thinking" note="Sustainable product design, assistive technology commercialization, and organizational execution." />
+            <EntrepreneurshipList />
+          </section>
+
+          {/* 11. About & Philosophy */}
+          <section className="section about-section" id="about">
+            <SectionTitle title="Background & Philosophy" note="Education background, technical interests, and engineering approach." />
+            <AboutSection />
+          </section>
+
+          {/* 12. References & Academic Network */}
+          <section className="section references-section" id="references">
+            <SectionTitle title="Academic Network & References" note="Research mentors and academic advisors." />
+            <ReferencesGrid />
+          </section>
         </main>
       </div>
 
+      {/* Footer */}
       <footer className="site-footer">
         <div className="section footer-inner">
-          <span>{siteMeta.brand}</span>
+          <div>
+            <strong>Aditya S Maller</strong> — AI/ML Research Engineer
+            <p className="footer-subtext">SPIRE Lab, IISc &bull; RV University &bull; Bengaluru, India</p>
+          </div>
           <div className="footer-links">
-            {siteMeta.repositoryUrl ? (
-              <a href={siteMeta.repositoryUrl} target="_blank" rel="noreferrer">
-                <i className="fa-brands fa-github" aria-hidden="true" />
-                <span>Built with Athena</span>
-              </a>
-            ) : null}
-            {profile.email ? <a href={`mailto:${profile.email}`}>{profile.email}</a> : null}
+            <a href="https://github.com/Aditya-Maller/" target="_blank" rel="noreferrer">
+              <i className="fa-brands fa-github" aria-hidden="true" />
+              <span>GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/aditya-s-maller-851895292/" target="_blank" rel="noreferrer">
+              <i className="fa-brands fa-linkedin-in" aria-hidden="true" />
+              <span>LinkedIn</span>
+            </a>
+            <a href="#hero" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+              <i className="fa-solid fa-arrow-up" aria-hidden="true" />
+              <span>Back to Top</span>
+            </a>
           </div>
         </div>
       </footer>
@@ -188,793 +215,476 @@ function App() {
   );
 }
 
+/* Sidebar Component */
 function SidebarProfile() {
-  const [detailsOpen, setDetailsOpen] = useState(false);
-  const organizationText = [profile.role, profile.organization ? `at ${profile.organization}` : ""].filter(Boolean).join(" ");
-
   return (
     <div className="sidebar-card">
       <div className="sidebar-avatar-frame">
-        {profile.avatar ? (
-          <img
-            className="sidebar-avatar"
-            src={profile.avatar}
-            width="192"
-            height="192"
-            decoding="async"
-            fetchPriority="high"
-            alt={profile.name}
-          />
-        ) : (
-          <div className="sidebar-avatar sidebar-avatar-placeholder" aria-hidden="true">
-            {getInitials(profile.name)}
-          </div>
-        )}
+        <div className="sidebar-avatar sidebar-avatar-placeholder">
+          <span>ASM</span>
+        </div>
       </div>
       <div className="sidebar-identity">
         <h1>{profile.name}</h1>
-        {profile.nativeName ? <p>{profile.nativeName}</p> : null}
-        {organizationText ? <span>{organizationText}</span> : null}
+        <p className="sidebar-title">{profile.nativeName}</p>
+        <div className="iisc-badge">
+          <i className="fa-solid fa-building-columns" aria-hidden="true" />
+          <span>SPIRE Lab — IISc</span>
+        </div>
       </div>
       <div className="sidebar-meta">
-        {profile.location ? (
-          <span>
-            <i className="fa-solid fa-location-dot" aria-hidden="true" />
-            {profile.location}
-          </span>
-        ) : null}
-        {profile.email ? (
-          <a href={`mailto:${profile.email}`}>
-            <i className="fa-solid fa-envelope" aria-hidden="true" />
-            {profile.email}
+        <span>
+          <i className="fa-solid fa-location-dot" aria-hidden="true" />
+          {profile.location}
+        </span>
+        <span>
+          <i className="fa-solid fa-graduation-cap" aria-hidden="true" />
+          RV University (B.Tech CSE AI/ML)
+        </span>
+      </div>
+
+      <div className="profile-links">
+        {profile.links.map((link) => (
+          <a key={link.label} href={link.href} target="_blank" rel="noreferrer" title={link.label} aria-label={link.label}>
+            <i className={profileIconMap[link.icon] ?? "fa-solid fa-link"} aria-hidden="true" />
           </a>
-        ) : null}
+        ))}
       </div>
-      <ProfileLinks />
 
-      <button
-        className="sidebar-toggle"
-        type="button"
-        aria-controls="profile-details"
-        aria-expanded={detailsOpen}
-        onClick={() => setDetailsOpen((value) => !value)}
-      >
-        <span>Profile Details</span>
-        <i className={`fa-solid fa-chevron-${detailsOpen ? "up" : "down"}`} aria-hidden="true" />
-      </button>
-
-      <div id="profile-details" className={`sidebar-collapsible${detailsOpen ? " is-open" : ""}`}>
-        {profile.focus?.length ? (
-          <div className="sidebar-block">
-            <h2>Research Focus</h2>
-            <TagList items={profile.focus} className="focus-row" />
-          </div>
-        ) : null}
-
-        {news.length ? (
-          <div className="sidebar-block">
-            <h2>Recent News</h2>
-            <div className="sidebar-news">
-              {news.slice(0, 4).map((item) => (
-                <a href={item.href} key={`${item.date}-${item.text}`} target="_blank" rel="noreferrer">
-                  <time>{item.date}</time>
-                  <span className="sidebar-news-text">
-                    <span className="sidebar-news-icon" aria-hidden="true">
-                      <SemanticIcon icon={newsIconMap[item.icon] ?? newsIconMap.accepted} />
-                    </span>
-                    <span>{item.text}</span>
-                  </span>
-                </a>
-              ))}
-            </div>
-          </div>
-        ) : null}
-      </div>
-    </div>
-  );
-}
-
-function MetricsDashboard({ stats }) {
-  return (
-    <div className="metrics-dashboard">
-      <div className="metric-card-grid">
-        <MetricCard label="Publications" value={stats.total} />
-        <MetricCard label="Selected" value={stats.featured} />
-        <MetricCard label="Open Artifacts" value={stats.openArtifacts} />
-        <MetricCard label="Research Areas" value={stats.byGroup.length} />
-      </div>
-      <div className="chart-grid">
-        <HorizontalBarChart title="Publications by Year" data={stats.byYear} />
-        <DonutChart title="Research Areas" data={stats.byGroup} />
-        <HorizontalBarChart title="Publication Types" data={stats.byType} />
-        <HorizontalBarChart title="Venue Families" data={stats.byVenueFamily} />
-      </div>
-    </div>
-  );
-}
-
-function MetricCard({ label, value }) {
-  return (
-    <div className="metric-card">
-      <strong>{formatNumber(value)}</strong>
-      <span>{label}</span>
-    </div>
-  );
-}
-
-function HorizontalBarChart({ title, data }) {
-  const max = Math.max(...data.map((item) => item.value), 1);
-
-  return (
-    <article className="chart-card">
-      <h3>{title}</h3>
-      <div className="bar-chart">
-        {data.map((item, index) => {
-          const percent = Math.max((item.value / max) * 100, 4);
-          return (
-            <div className="bar-row" key={item.label}>
-              <span className="bar-label">{item.label}</span>
-              <span
-                className="bar-track"
-                style={{ "--bar-value": `${percent}%`, "--chart-color": chartColors[index % chartColors.length] }}
-              >
-                <span className="bar-fill" />
-              </span>
-              <span className="bar-value">{item.value}</span>
-            </div>
-          );
-        })}
-      </div>
-    </article>
-  );
-}
-
-function DonutChart({ title, data }) {
-  const total = data.reduce((sum, item) => sum + item.value, 0);
-  let start = 0;
-  const gradient = total
-    ? `conic-gradient(${data
-        .map((item, index) => {
-          const end = start + (item.value / total) * 360;
-          const segment = `${chartColors[index % chartColors.length]} ${start}deg ${end}deg`;
-          start = end;
-          return segment;
-        })
-        .join(", ")})`
-    : "var(--surface-strong)";
-
-  return (
-    <article className="chart-card chart-card-donut">
-      <h3>{title}</h3>
-      <div className="donut-layout">
-        <div className="donut-chart" style={{ "--donut-gradient": gradient }}>
-          <span>{total}</span>
-        </div>
-        <div className="chart-legend">
-          {data.map((item, index) => (
-            <span key={item.label}>
-              <i style={{ "--chart-color": chartColors[index % chartColors.length] }} aria-hidden="true" />
-              {item.label}
-            </span>
+      <div className="sidebar-block">
+        <h2>Primary Focus</h2>
+        <div className="focus-tags">
+          {profile.focus.map((item) => (
+            <span key={item} className="focus-chip">{item}</span>
           ))}
         </div>
       </div>
-    </article>
-  );
-}
 
-function PublicationGroup({ title, papers, githubStats }) {
-  const highlighted = papers.filter((paper) => paper.featured);
-  const compact = papers.filter((paper) => !paper.featured);
-
-  return (
-    <section className="publication-group" aria-labelledby={`group-${slugify(title)}`}>
-      <h3 id={`group-${slugify(title)}`}>
-        <TitleIcon icon={publicationGroupIconMap[title] ?? fallbackTitleIcon} compact />
-        <span>{title}</span>
-      </h3>
-      {highlighted.length ? (
-        <div className="highlight-list">
-          {highlighted.map((paper) => (
-            <FeaturedPaper key={paper.title} paper={paper} githubStats={githubStats} />
+      <div className="sidebar-block">
+        <h2>Recent News</h2>
+        <div className="sidebar-news">
+          {news.slice(0, 4).map((item) => (
+            <a key={item.text} href={item.href} target="_blank" rel="noreferrer">
+              <time>{item.date}</time>
+              <span className="sidebar-news-text">{item.text}</span>
+            </a>
           ))}
         </div>
-      ) : null}
-      {compact.length ? (
-        <div className="compact-paper-list">
-          {compact.map((paper) => (
-            <CompactPaper key={paper.title} paper={paper} githubStats={githubStats} />
-          ))}
-        </div>
-      ) : null}
-    </section>
-  );
-}
-
-function FeaturedPaper({ paper, githubStats }) {
-  return (
-    <article className="featured-paper">
-      <PublicationVisual paper={paper} />
-      <div className="featured-paper-copy">
-        <PublicationMeta paper={paper} />
-        <h4>{paper.title}</h4>
-        <p className="authors">{highlightAuthors(paper.authors)}</p>
-        {paper.summary ? <p>{paper.summary}</p> : null}
-        {paper.tags?.length ? <TagList items={paper.tags} className="paper-tags" /> : null}
-        <ActionLinks links={paper.links} githubStats={githubStats} />
       </div>
-    </article>
-  );
-}
-
-function PublicationVisual({ paper }) {
-  if (!paper.image) {
-    return (
-      <div className="paper-figure paper-figure-fallback">
-        <span>{paper.group ?? paper.type ?? "Research"}</span>
-      </div>
-    );
-  }
-
-  return (
-    <div className="paper-figure">
-      <picture>
-        {isRasterImage(paper.image) ? <source srcSet={toWebpPath(paper.image)} type="image/webp" /> : null}
-        <img src={paper.image} alt={`${paper.title} visual summary`} loading="lazy" decoding="async" />
-      </picture>
     </div>
   );
 }
 
-function CompactPaper({ paper, githubStats }) {
+/* 1. Executive Hero */
+function ExecutiveHero() {
   return (
-    <article className="compact-paper-row">
-      <PublicationMeta paper={paper} compact />
-      <div className="compact-main">
-        <h4>{paper.title}</h4>
-        <p className="authors">{highlightAuthors(paper.authors)}</p>
-        {paper.tags?.length ? <TagList items={paper.tags.slice(0, 4)} className="paper-tags" /> : null}
+    <div className="hero-box">
+      <div className="hero-badge-strip">
+        <span className="hero-tag hero-tag-iisc">
+          <i className="fa-solid fa-building-columns" aria-hidden="true" /> SPIRE Lab, IISc Intern
+        </span>
+        <span className="hero-tag">
+          <i className="fa-solid fa-code-branch" aria-hidden="true" /> AI/ML Systems Engineer
+        </span>
       </div>
-      <ActionLinks links={paper.links} githubStats={githubStats} />
-    </article>
+
+      <h1 className="hero-headline">Aditya S Maller</h1>
+      <p className="hero-subheadline">
+        AI/ML Research Engineer who builds what the business needs.
+      </p>
+
+      <p className="hero-summary">
+        Operating at the intersection of <strong>Machine Learning</strong>, <strong>Generative AI / LLMs</strong>, <strong>Speech & Audio Signal Processing</strong>, and <strong>High-Performance AI Systems Engineering</strong>. Currently researching speech ML, regional Kannada dialect classification, and model quantization at SPIRE Lab, Indian Institute of Science (IISc).
+      </p>
+
+      <div className="hero-actions">
+        <a className="btn btn-primary" href="#publications">
+          <i className="fa-solid fa-file-lines" aria-hidden="true" /> View Research
+        </a>
+        <a className="btn btn-secondary" href="#projects">
+          <i className="fa-solid fa-code" aria-hidden="true" /> View Systems Built
+        </a>
+        <a className="btn btn-outline" href="https://github.com/Aditya-Maller/" target="_blank" rel="noreferrer">
+          <i className="fa-brands fa-github" aria-hidden="true" /> GitHub
+        </a>
+        <a className="btn btn-outline" href="https://www.linkedin.com/in/aditya-s-maller-851895292/" target="_blank" rel="noreferrer">
+          <i className="fa-brands fa-linkedin-in" aria-hidden="true" /> LinkedIn
+        </a>
+      </div>
+    </div>
   );
 }
 
-function PublicationMeta({ paper, compact = false }) {
-  const className = compact ? "compact-venue" : "paper-venue-line";
+/* 2. Technical Snapshot (Grouped Skills) */
+function TechnicalSnapshot() {
+  const categories = [
+    {
+      title: "AI & Machine Learning",
+      icon: "fa-solid fa-brain",
+      skills: ["Machine Learning", "Deep Learning", "Generative AI", "LLMs", "Transformer Representations", "Quantum ML", "NLP"]
+    },
+    {
+      title: "Speech & Audio ML",
+      icon: "fa-solid fa-waveform",
+      skills: ["Speech Signal Processing", "Audio ML", "Dialect Classification", "Model Quantization", "NVIDIA NeMo", "RESPIN Framework"]
+    },
+    {
+      title: "Systems & Engineering",
+      icon: "fa-solid fa-server",
+      skills: ["Python", "PyTorch", "FastAPI (Async)", "MongoDB (Vector Retrieval)", "Redis Caching", "Celery Async Tasks", "Docker", "LightGBM", "Flask", "React"]
+    },
+    {
+      title: "Evaluation & Methodology",
+      icon: "fa-solid fa-chart-line",
+      skills: ["Static PE Feature Extraction", "EMBER Dataset", "Feature Engineering", "Model Benchmarking", "ROUGE-L / BERTScore", "Quantum Entropy Metrics"]
+    }
+  ];
 
   return (
-    <span className={className}>
-      <SemanticIcon icon={venueIcon} />
-      <span>{paper.venue}</span>
-      {paper.year ? <time>{paper.year}</time> : null}
-      {paper.type ? <span>{paper.type}</span> : null}
-    </span>
-  );
-}
-
-function ProjectList({ items, githubStats }) {
-  return (
-    <div className="project-grid" role="region" aria-label="Projects" tabIndex={0}>
-      {items.map((project) => (
-        <article className="project-card" key={project.title}>
-          <div className="project-card-head">
-            <h3>{project.title}</h3>
-            {project.status ? (
-              <span className="project-status">
-                <SemanticIcon icon={statusIconMap[project.status] ?? fallbackTitleIcon} />
-                {project.status}
-              </span>
-            ) : null}
+    <div className="snapshot-grid">
+      {categories.map((cat) => (
+        <div key={cat.title} className="snapshot-card">
+          <div className="snapshot-card-head">
+            <i className={cat.icon} aria-hidden="true" />
+            <h3>{cat.title}</h3>
           </div>
-          <p>{project.summary}</p>
-          {project.tags?.length ? <TagList items={project.tags} className="project-tags" /> : null}
-          <ActionLinks links={project.links} githubStats={githubStats} />
+          <div className="snapshot-skills">
+            {cat.skills.map((s) => (
+              <span key={s} className="skill-chip">{s}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* 3. Evidence-Based Key Highlights */
+function EvidenceHighlights() {
+  const highlights = [
+    {
+      title: "SPIRE Lab — IISc Research Internship",
+      badge: "IISc Research Role",
+      desc: "Machine Learning Research Intern at SPIRE Lab, Indian Institute of Science (IISc). Working on speech/audio ML, Kannada regional dialect classification, and deep learning model quantization for resource-constrained speech recognition.",
+      link: "#experience"
+    },
+    {
+      title: "FastRAG Backend Architecture",
+      badge: "GenAI Production System",
+      desc: "Independent full-stack asynchronous RAG system with FastAPI, MongoDB native vector similarity retrieval, Gemini synthesis, Redis caching, Celery task queues, and multi-stage Docker containerization.",
+      link: "#projects"
+    },
+    {
+      title: "Adaptive Decoding Temperature Prediction",
+      badge: "+10.9% ROUGE-L | +5.7% BERTScore",
+      desc: "Published/presented research dynamically predicting token decoding temperature per query using internal transformer layer representations and statistical text features over static baselines.",
+      link: "#publications"
+    },
+    {
+      title: "Quantum LLM Hallucination Mitigation",
+      badge: "Springer Published Research",
+      desc: "Springer-published research using quantum entropy indicators and adaptive temperature scaling for LLM hallucination mitigation (-26.7% reported hallucination rate, +178.6% uncertainty score).",
+      link: "#publications"
+    },
+    {
+      title: "LightGBM Static Malware Interception",
+      badge: "~92% Accuracy | ~0.91 Recall",
+      desc: "Machine learning cybersecurity engine analyzing 526 static PE metadata features on the EMBER dataset with real-time download interception for Windows desktop environments.",
+      link: "#projects"
+    }
+  ];
+
+  return (
+    <div className="highlights-grid">
+      {highlights.map((h, i) => (
+        <a key={h.title} href={h.link} className="highlight-card">
+          <div className="highlight-num">0{i + 1}</div>
+          <div className="highlight-content">
+            <span className="highlight-badge">{h.badge}</span>
+            <h3>{h.title}</h3>
+            <p>{h.desc}</p>
+          </div>
+          <i className="fa-solid fa-arrow-right highlight-arrow" aria-hidden="true" />
+        </a>
+      ))}
+    </div>
+  );
+}
+
+/* 4. Publications List */
+function PublicationsList() {
+  return (
+    <div className="publications-list">
+      {publications.map((pub) => (
+        <article key={pub.title} className="pub-card">
+          <div className="pub-header">
+            <span className="pub-venue">{pub.venue} &bull; {pub.year}</span>
+            {pub.metricsBadge && <span className="pub-metrics-badge">{pub.metricsBadge}</span>}
+          </div>
+          <h3 className="pub-title">{pub.title}</h3>
+          <p className="pub-authors">{pub.authors}</p>
+          <p className="pub-summary">{pub.summary}</p>
+          <div className="pub-tags">
+            {pub.tags?.map((t) => (
+              <span key={t} className="tag-chip">{t}</span>
+            ))}
+          </div>
+          <div className="pub-links">
+            {pub.links?.map((link) => (
+              <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
+                <i className={getActionIcon(link)} aria-hidden="true" />
+                <span>{link.label}</span>
+              </a>
+            ))}
+          </div>
         </article>
       ))}
     </div>
   );
 }
 
-function ProfileLinks() {
+/* 5. Projects List */
+function ProjectsList() {
   return (
-    <div className="profile-links">
-      {profile.links.map((link) => (
-        <a key={link.label} href={link.href} target="_blank" rel="noreferrer" aria-label={link.label} title={link.label}>
-          <i className={profileIconMap[link.icon] ?? profileIconMap.Website} aria-hidden="true" />
-        </a>
-      ))}
-    </div>
-  );
-}
-
-function SectionTitle({ title, note }) {
-  return (
-    <div className="section-title">
-      <h2>
-        <TitleIcon icon={sectionIconMap[title] ?? fallbackTitleIcon} />
-        <span>{title}</span>
-      </h2>
-      {note ? <p>{note}</p> : null}
-    </div>
-  );
-}
-
-function TitleIcon({ icon, compact = false }) {
-  return (
-    <span className={compact ? "title-icon title-icon-compact" : "title-icon"} aria-hidden="true">
-      <SemanticIcon icon={icon} />
-    </span>
-  );
-}
-
-function SemanticIcon({ icon }) {
-  return <Icon className="semantic-icon" icon={icon} aria-hidden="true" />;
-}
-
-function TagList({ items, className }) {
-  return (
-    <div className={className}>
-      {items.map((item) => (
-        <span key={item}>{item}</span>
-      ))}
-    </div>
-  );
-}
-
-function ActionLinks({ links, githubStats = {} }) {
-  if (!links?.length) return null;
-
-  return (
-    <div className="action-links">
-      {links.map((link) => {
-        const githubRepo = getGithubRepo(link.href);
-        const showStats = Boolean(githubRepo && shouldShowGithubStats(link));
-        const stats = showStats
-          ? mergeGithubStats(githubStats[githubRepo], getGithubStatsFallback(link))
-          : null;
-
-        return (
-          <a key={`${link.label}-${link.href}`} href={link.href} target="_blank" rel="noreferrer">
-            <i className={getActionIcon(link)} aria-hidden="true" />
-            <span>{link.label}</span>
-            {showStats ? <GithubRepoStats stats={stats} /> : null}
-          </a>
-        );
-      })}
-    </div>
-  );
-}
-
-function GithubRepoStats({ stats }) {
-  if (!stats || typeof stats.stars !== "number") return null;
-
-  return (
-    <span className="repo-stats">
-      <span className="repo-stat" title={`${stats.stars.toLocaleString()} GitHub stars`}>
-        <i className="fa-solid fa-star" aria-hidden="true" />
-        {formatGithubCount(stats.stars)}
-      </span>
-    </span>
-  );
-}
-
-function Timeline({ items }) {
-  return (
-    <div className="timeline">
-      {items.map((item, index) => (
-        <div className="timeline-item" key={`${item.period}-${item.title}-${index}`}>
-          <div className="timeline-main">
-            <strong>{item.title}</strong>
-            {item.href ? (
-              <a className="timeline-place" href={item.href} target="_blank" rel="noreferrer">
-                {item.place}
-              </a>
-            ) : (
-              <span className="timeline-place">{item.place}</span>
-            )}
-            {item.detail ? <p>{renderRichText(item.detail)}</p> : null}
+    <div className="projects-grid">
+      {projects.map((proj) => (
+        <article key={proj.title} className="project-card">
+          <div className="project-head">
+            <div>
+              <span className="project-category">{proj.category}</span>
+              <h3>{proj.title}</h3>
+            </div>
+            <span className="project-status">{proj.status}</span>
           </div>
-          <time>{item.period}</time>
+
+          <p className="project-summary">{proj.summary}</p>
+
+          {proj.architecture?.length && (
+            <div className="project-arch">
+              <strong>Technical Architecture & Decisions:</strong>
+              <ul>
+                {proj.architecture.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {proj.metrics && (
+            <div className="project-metrics">
+              <i className="fa-solid fa-chart-line" aria-hidden="true" />
+              <span>{proj.metrics}</span>
+            </div>
+          )}
+
+          <div className="project-tags">
+            {proj.tags?.map((t) => (
+              <span key={t} className="tag-chip">{t}</span>
+            ))}
+          </div>
+
+          <div className="project-links">
+            {proj.links?.map((link) => (
+              <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
+                <i className={getActionIcon(link)} aria-hidden="true" />
+                <span>{link.label}</span>
+              </a>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+/* 6. Experience Timeline */
+function ExperienceTimeline() {
+  return (
+    <div className="timeline-container">
+      {experience.map((exp, idx) => (
+        <div key={`${exp.title}-${idx}`} className={`timeline-card ${exp.featured ? "timeline-featured" : ""}`}>
+          <div className="timeline-badge-column">
+            <span className="timeline-year">{exp.period}</span>
+            {exp.featured && <span className="timeline-flag">Primary Role</span>}
+          </div>
+          <div className="timeline-content">
+            <h3 className="timeline-title">{exp.title}</h3>
+            <a className="timeline-place" href={exp.href} target="_blank" rel="noreferrer">
+              <i className="fa-solid fa-building" aria-hidden="true" /> {exp.place}
+            </a>
+            <p className="timeline-detail">{exp.detail}</p>
+            <div className="timeline-tags">
+              {exp.tags?.map((t) => (
+                <span key={t} className="tag-chip">{t}</span>
+              ))}
+            </div>
+          </div>
         </div>
       ))}
     </div>
   );
 }
 
-function HonorsList({ items }) {
+/* 7. Leadership List */
+function LeadershipList() {
   return (
-    <div className="honor-list">
-      {items.map((item) => {
-        const { title, year } = splitTrailingYear(item);
-
-        return (
-          <div className="honor-row" key={item}>
-            <span>{title}</span>
-            {year ? <time>{year}</time> : null}
+    <div className="leadership-list">
+      {leadership.map((item) => (
+        <article key={item.organization} className="leadership-card">
+          <div className="leadership-head">
+            <div>
+              <h3>{item.role}</h3>
+              <span className="leadership-org">{item.organization}</span>
+            </div>
+            <span className="leadership-period">{item.period}</span>
           </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function ServiceList({ items }) {
-  return (
-    <div className="service-groups">
-      {items.map((group) => (
-        <section className="service-group" key={group.category}>
-          <h3>
-            <TitleIcon icon={serviceIconMap[group.category] ?? fallbackTitleIcon} compact />
-            <span>{group.category}</span>
-          </h3>
-          <div className="service-chip-grid">
-            {group.items.map((item) => {
-              const { title, year } = splitServiceYears(item);
-
-              return (
-                <span className="service-chip" key={item}>
-                  <span>{title}</span>
-                  {year ? <time>{year}</time> : null}
-                </span>
-              );
-            })}
+          <p className="leadership-summary">{item.summary}</p>
+          <div className="leadership-activities">
+            <strong>Key Organizational Responsibilities:</strong>
+            <ul>
+              {item.keyActivities.map((act, i) => (
+                <li key={i}>{act}</li>
+              ))}
+            </ul>
           </div>
-        </section>
+        </article>
       ))}
     </div>
   );
 }
 
-function getPublicationGroups(papers, preferredOrder) {
-  const found = new Set(papers.map((paper) => paper.group).filter(Boolean));
-  const ordered = preferredOrder.filter((group) => found.has(group));
-  const remaining = Array.from(found).filter((group) => !ordered.includes(group)).sort();
-  return [...ordered, ...remaining];
+/* 8. Competitions Grid */
+function CompetitionsGrid() {
+  return (
+    <div className="competitions-grid">
+      {competitions.map((comp) => (
+        <div key={comp.title} className="competition-card">
+          <div className="competition-header">
+            <span className="competition-result">{comp.result}</span>
+            <span className="competition-year">{comp.year}</span>
+          </div>
+          <h3>{comp.title}</h3>
+          <span className="competition-org">{comp.organizer}</span>
+          <p>{comp.detail}</p>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-function getPublicationStats(papers) {
-  const byYear = countBy(papers, (paper) => paper.year || "Unknown").sort((a, b) => b.label.localeCompare(a.label));
-  const byGroup = countBy(papers, (paper) => paper.group || "Other").sort((a, b) => b.value - a.value);
-  const byType = countBy(papers, (paper) => paper.type || "Publication").sort((a, b) => b.value - a.value);
-  const byVenueFamily = countBy(papers, getVenueFamily).sort((a, b) => b.value - a.value);
-  const openArtifacts = papers.filter((paper) =>
-    paper.links?.some((link) => /code|dataset|demo|project|site|documentation/i.test(link.label))
-  ).length;
-
-  return {
-    total: papers.length,
-    featured: papers.filter((paper) => paper.featured).length,
-    openArtifacts,
-    byYear,
-    byGroup,
-    byType,
-    byVenueFamily
-  };
+/* 9. Public Good List */
+function PublicGoodList() {
+  return (
+    <div className="public-good-grid">
+      {publicGood.map((pg) => (
+        <div key={pg.title} className="pg-card">
+          <span className="pg-type">{pg.type}</span>
+          <h3>{pg.title}</h3>
+          <p className="pg-summary">{pg.summary}</p>
+          <div className="pg-impact">
+            <strong>Community & Technical Impact:</strong> {pg.impact}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-function countBy(items, getLabel) {
-  const counts = new Map();
-  items.forEach((item) => {
-    const label = getLabel(item);
-    counts.set(label, (counts.get(label) ?? 0) + 1);
-  });
-  return Array.from(counts, ([label, value]) => ({ label, value }));
+/* 10. Entrepreneurship List */
+function EntrepreneurshipList() {
+  return (
+    <div className="entrepreneurship-list">
+      {entrepreneurship.map((ent) => (
+        <div key={ent.title} className="ent-card">
+          <div className="ent-head">
+            <h3>{ent.title}</h3>
+            <span className="ent-context">{ent.context}</span>
+          </div>
+          {ent.team && <p className="ent-team"><strong>Team:</strong> {ent.team}</p>}
+          {ent.mentors && <p className="ent-mentors"><strong>Faculty Mentors:</strong> {ent.mentors}</p>}
+          <p className="ent-summary">{ent.summary}</p>
+          <div className="ent-learnings">
+            <strong>Key Execution & Business Insights:</strong>
+            <ul>
+              {ent.learnings.map((l, i) => (
+                <li key={i}>{l}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-function getVenueFamily(paper) {
-  const value = `${paper.type ?? ""} ${paper.venue ?? ""}`.toLowerCase();
-  if (value.includes("journal") || value.includes("jmlr") || value.includes("joss")) return "Journal";
-  if (value.includes("dataset") || value.includes("benchmark")) return "Dataset";
-  if (value.includes("report") || value.includes("preprint") || value.includes("technical")) return "Report";
-  if (value.includes("workshop")) return "Workshop";
-  return "Conference";
+/* 11. About Section */
+function AboutSection() {
+  return (
+    <div className="about-box">
+      <h3>Education & Profile</h3>
+      <p>
+        Currently pursuing a <strong>B.Tech in Computer Science & Engineering (AI & ML)</strong> at <strong>RV University</strong>, Bengaluru (2022 – 2026).
+      </p>
+      <p>
+        My technical trajectory combines academic empirical research with rigorous AI systems engineering. I believe software and machine learning solutions should be low on hype, high on measurable signal, and built directly to fulfill concrete business or research objectives.
+      </p>
+
+      <h3>Research & Technical Philosophy</h3>
+      <ul>
+        <li><strong>Empirical Rigor:</strong> Every machine learning claim or algorithm decision must be backed by benchmark metrics (+10.9% ROUGE-L, BERTScore, Recall).</li>
+        <li><strong>Async Systems First:</strong> Building high-throughput API services (FastAPI, Redis caching, Celery task queues) that handle real-world latency and scale gracefully.</li>
+        <li><strong>Quantization & Edge ML:</strong> Reducing computational footprint for deployment on edge and resource-constrained environments (SPIRE Lab Kannada dialect models).</li>
+      </ul>
+
+      <h3>Interests Beyond Code</h3>
+      <p>
+        Studying business case studies, technology finance, organizational design, board game mechanics, and upcycling product design.
+      </p>
+    </div>
+  );
 }
 
-function renderRichText(content) {
-  if (!Array.isArray(content)) return content;
-
-  return content.map((part, index) => {
-    if (typeof part === "string") return part;
-    const body = part.strong ? <strong>{part.text}</strong> : part.text;
-
-    if (part.href) {
-      return (
-        <a key={`${part.href}-${index}`} href={part.href} target="_blank" rel="noreferrer">
-          {body}
-        </a>
-      );
-    }
-
-    return <span key={`${part.text}-${index}`}>{body}</span>;
-  });
+/* 12. References Grid */
+function ReferencesGrid() {
+  return (
+    <div className="references-grid">
+      {references.map((ref) => (
+        <div key={ref.name} className="ref-card">
+          <h3>{ref.name}</h3>
+          <p className="ref-title">{ref.title}</p>
+          <p className="ref-inst">{ref.institution}</p>
+          <div className="ref-meta">
+            <span className="ref-role">{ref.role}</span>
+            <span className="ref-domain">Domain: {ref.domain}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-function useGithubRepoStats(collections) {
-  const repos = useMemo(() => {
-    const found = new Set();
-    collections.forEach((items) => {
-      items.forEach((item) => {
-        item.links?.forEach((link) => {
-          const repo = getGithubRepo(link.href);
-          if (repo && shouldShowGithubStats(link)) {
-            found.add(repo);
-          }
-        });
-      });
-    });
-    return Array.from(found);
-  }, [collections]);
-  const [repoStats, setRepoStats] = useState({});
-
-  useEffect(() => {
-    if (!repos.length) {
-      setRepoStats({});
-      return undefined;
-    }
-
-    let cancelled = false;
-    const now = Date.now();
-    const cachedByRepo = Object.fromEntries(
-      repos.map((repo) => [repo, readGithubStatsCache(repo)])
-    );
-
-    const cachedEntries = repos.flatMap((repo) => {
-      const cached = cachedByRepo[repo];
-      return cached ? [[repo, cached]] : [];
-    });
-
-    if (cachedEntries.length) {
-      setRepoStats(Object.fromEntries(cachedEntries));
-    }
-
-    const reposToRefresh = repos.filter((repo) => {
-      const cached = cachedByRepo[repo];
-      // Template placeholder repos render fallback counts without noisy API errors.
-      if (isPlaceholderGithubRepo(repo)) return false;
-      return !cached || now - cached.checkedAt >= githubStatsCacheTtl;
-    });
-
-    if (!reposToRefresh.length) return undefined;
-
-    const loadStats = async () => {
-      const entries = await Promise.all(
-        reposToRefresh.map(async (repo) => {
-          const controller = new AbortController();
-          const timeout = window.setTimeout(() => controller.abort(), 3500);
-          try {
-            const response = await fetch(`https://api.github.com/repos/${repo}`, {
-              headers: { Accept: "application/vnd.github+json" },
-              signal: controller.signal
-            });
-            if (!response.ok) {
-              markGithubStatsCacheChecked(repo, cachedByRepo[repo]);
-              return null;
-            }
-            const data = await response.json();
-            const stats = normalizeGithubStats({ stars: data.stargazers_count });
-            if (!stats) return null;
-            writeGithubStatsCache(repo, stats);
-            return [repo, stats];
-          } catch {
-            markGithubStatsCacheChecked(repo, cachedByRepo[repo]);
-            return null;
-          } finally {
-            window.clearTimeout(timeout);
-          }
-        })
-      );
-
-      const liveEntries = entries.filter(Boolean);
-      if (!cancelled && liveEntries.length) {
-        setRepoStats((currentStats) => ({
-          ...currentStats,
-          ...Object.fromEntries(liveEntries)
-        }));
-      }
-    };
-
-    let cleanupIdle = () => {};
-    const cleanupLoad = runAfterInitialLoad(() => {
-      cleanupIdle = runWhenIdle(loadStats, 1200);
-    });
-
-    return () => {
-      cancelled = true;
-      cleanupLoad();
-      cleanupIdle();
-    };
-  }, [repos]);
-
-  return repoStats;
-}
-
-function readGithubStatsCache(repo) {
-  const key = getGithubStatsCacheKey(repo);
-  const legacyKey = getLegacyStarCacheKey(repo);
-  return readGithubStatsCacheStorage("localStorage", key)
-    ?? readGithubStatsCacheStorage("sessionStorage", key)
-    ?? readGithubStatsCacheStorage("localStorage", legacyKey)
-    ?? readGithubStatsCacheStorage("sessionStorage", legacyKey);
-}
-
-function writeGithubStatsCache(repo, stats) {
-  const now = Date.now();
-  writeGithubStatsCacheEntry(repo, { ...stats, updatedAt: now, checkedAt: now });
-}
-
-function markGithubStatsCacheChecked(repo, cached) {
-  if (!cached) return;
-  writeGithubStatsCacheEntry(repo, { ...cached, checkedAt: Date.now() });
-}
-
-function writeGithubStatsCacheEntry(repo, entry) {
-  const key = getGithubStatsCacheKey(repo);
-  if (writeGithubStatsCacheStorage("localStorage", key, entry)) return;
-  if (!writeGithubStatsCacheStorage("sessionStorage", key, entry)) {
-    // Optional cache only.
-  }
-}
-
-function readGithubStatsCacheStorage(storageName, key) {
-  try {
-    const storage = window[storageName];
-    const cached = JSON.parse(storage.getItem(key));
-    const stats = normalizeGithubStats({ stars: cached?.stars ?? cached?.count });
-    const updatedAt = Number(cached?.updatedAt ?? cached?.timestamp);
-    const checkedAt = Number(cached?.checkedAt ?? updatedAt);
-    if (!stats || !Number.isFinite(updatedAt) || !Number.isFinite(checkedAt)) return null;
-    return { ...stats, updatedAt, checkedAt };
-  } catch {
-    return null;
-  }
-}
-
-function writeGithubStatsCacheStorage(storageName, key, entry) {
-  try {
-    window[storageName].setItem(key, JSON.stringify(entry));
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function getGithubStatsCacheKey(repo) {
-  return `github-repo-stats:${repo}`;
-}
-
-function getLegacyStarCacheKey(repo) {
-  return `github-stars:${repo}`;
-}
-
-function shouldShowGithubStats(link) {
-  if (link.showGithubStats === false || link.stats === false) return false;
-  if (link.showGithubStats === true || link.stats === true) return true;
-  const label = String(link.label ?? "").toLowerCase();
-  return ["code", "github", "repo", "repository"].some((keyword) => label.includes(keyword));
-}
-
-function getGithubStatsFallback(link) {
-  return normalizeGithubStats({ stars: link.stars });
-}
-
-function mergeGithubStats(liveStats, fallbackStats) {
-  return normalizeGithubStats({ stars: liveStats?.stars ?? fallbackStats?.stars });
-}
-
-function normalizeGithubStats(stats) {
-  const stars = Number(stats?.stars);
-  return Number.isFinite(stars) ? { stars } : null;
-}
-
-function getGithubRepo(href) {
-  try {
-    const url = new URL(href);
-    if (url.hostname !== "github.com") return null;
-    const [owner, repo] = url.pathname.split("/").filter(Boolean);
-    if (!owner || !repo) return null;
-    return `${owner}/${repo.replace(/\.git$/, "")}`;
-  } catch {
-    return null;
-  }
-}
-
-function isPlaceholderGithubRepo(repo) {
-  return repo.split("/")[0]?.toLowerCase() === "example";
-}
-
-function highlightAuthors(authors = "") {
-  const names = profile.highlightNames?.length ? profile.highlightNames : [profile.name].filter(Boolean);
-  if (!names.length) return authors;
-
-  const nameSet = new Set(names);
-  const pattern = new RegExp(`(${names.map(escapeRegExp).join("|")})`, "g");
-  return authors.split(pattern).map((part, index) => (
-    nameSet.has(part) ? <strong key={`${part}-${index}`}>{part}</strong> : <span key={`${part}-${index}`}>{part}</span>
-  ));
+/* Helpers */
+function SectionTitle({ title, note }) {
+  return (
+    <div className="section-title">
+      <h2>{title}</h2>
+      {note && <p className="section-note">{note}</p>}
+    </div>
+  );
 }
 
 function getInitialTheme() {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-function runAfterInitialLoad(callback) {
-  let timeoutId = 0;
-
-  const run = () => {
-    timeoutId = window.setTimeout(callback, 0);
-  };
-
-  if (document.readyState === "complete") {
-    run();
-    return () => window.clearTimeout(timeoutId);
+  if (typeof window !== "undefined") {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "dark"; // Default to dark mode for sleek technical aesthetic
   }
-
-  window.addEventListener("load", run, { once: true });
-  return () => {
-    window.removeEventListener("load", run);
-    window.clearTimeout(timeoutId);
-  };
+  return "dark";
 }
 
-function runWhenIdle(callback, timeout = 1000) {
-  if ("requestIdleCallback" in window) {
-    const idleId = window.requestIdleCallback(callback, { timeout });
-    return () => window.cancelIdleCallback(idleId);
+function getInitialHash() {
+  if (typeof window !== "undefined" && window.location.hash) {
+    return window.location.hash.replace("#", "");
   }
-
-  const timeoutId = window.setTimeout(callback, timeout);
-  return () => window.clearTimeout(timeoutId);
-}
-
-function splitTrailingYear(value) {
-  const match = value.match(/^(.*),\s*(\d{4})$/);
-  if (!match) return { title: value, year: "" };
-  return { title: match[1], year: match[2] };
-}
-
-function splitServiceYears(value) {
-  const match = value.match(/^(.+?)\s((?:\d{4}(?:,\s*)?)+)$/);
-  if (!match) return { title: value, year: "" };
-  return { title: match[1], year: match[2].replace(/,\s*/g, " / ") };
-}
-
-function slugify(value) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-}
-
-function formatNumber(value) {
-  return new Intl.NumberFormat("en").format(value);
-}
-
-function formatGithubCount(value) {
-  if (value >= 1000) {
-    const rounded = Math.round((value / 1000) * 10) / 10;
-    return `${rounded.toString().replace(/\.0$/, "")}k`;
-  }
-  return value.toString();
-}
-
-function getInitials(value = "") {
-  return value
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase())
-    .join("") || "A";
-}
-
-function isRasterImage(src) {
-  return /\.(png|jpe?g)$/i.test(src);
-}
-
-function toWebpPath(src) {
-  return src.replace(/\.(png|jpe?g)$/i, ".webp");
-}
-
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return "hero";
 }
 
 export default App;

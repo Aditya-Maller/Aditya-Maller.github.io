@@ -1,35 +1,70 @@
 export const projects = [
   {
-    title: "Open Research Toolkit",
-    status: "Active",
+    title: "FastRAG — Asynchronous High-Performance RAG Architecture",
+    status: "Production Ready",
+    category: "Generative AI Systems",
     summary:
-      "A reusable research software project with documentation, reproducible examples, releases, and an academic artifact trail.",
-    tags: ["Research Software", "Reproducibility", "Documentation"],
+      "An asynchronous full-stack Retrieval-Augmented Generation (RAG) backend engine. Built with FastAPI for concurrent async requests, MongoDB native vector similarity retrieval, Gemini synthesis, Redis query caching, Celery async indexing task queues, and Docker containerization.",
+    architecture: [
+      "Asynchronous API layer built on FastAPI with async/await database connectors",
+      "MongoDB native vector search for fast cosine similarity vector retrieval",
+      "Redis caching layer for query embeddings to reduce redundant LLM calls",
+      "Celery worker pool for background document chunking and vector ingestion",
+      "Multi-stage Docker build pipeline for reproducible deployment"
+    ],
+    tags: ["FastAPI", "MongoDB Vector Search", "Gemini", "Redis", "Celery", "Docker", "Python"],
     links: [
-      { label: "Code", href: "https://github.com/example/open-research-toolkit", stars: 128 },
-      { label: "Release", href: "https://github.com/example/open-research-toolkit/releases" }
+      { label: "Code Repository", href: "https://github.com/Aditya-Maller/Rag-based-chatbot-fastapi-project" }
     ]
   },
   {
-    title: "Dataset Explorer",
-    status: "Prototype",
+    title: "Static Malware Interception & Detection System",
+    status: "Completed",
+    category: "ML Systems & Cybersecurity",
     summary:
-      "An interactive project page for dataset cards, benchmark splits, model outputs, and reproducibility notes.",
-    tags: ["Dataset", "Benchmark", "Demo"],
+      "A static malware classification engine and real-time cross-platform download interceptor. Evaluates 526 static Portable Executable (PE) metadata features on the EMBER dataset using LightGBM gradient boosted decision trees.",
+    architecture: [
+      "526-dimensional static feature extraction engine analyzing PE headers, sections, and import tables",
+      "LightGBM classifier tuned for high recall against novel zero-day malware signatures",
+      "Real-time download interception daemon for Windows file system monitoring",
+      "Isolated sandbox runner for suspicious binary execution evaluation"
+    ],
+    metrics: "~92% Accuracy | ~0.91 Malware Recall",
+    tags: ["LightGBM", "Cybersecurity", "PE Static Features", "EMBER", "Python", "System Interception"],
     links: [
-      { label: "Code", href: "https://github.com/example/dataset-explorer", stars: 64 },
-      { label: "Demo", href: "https://example.com/dataset-explorer" }
+      { label: "Code Repository", href: "https://github.com/Aditya-Maller/Malware-detection" }
     ]
   },
   {
-    title: "Course Companion",
-    status: "Maintained",
+    title: "SPIRE Dialect Classification & Quantization Demo UI",
+    status: "Research Demo",
+    category: "Speech / Audio ML",
     summary:
-      "A lightweight teaching portal for schedules, readings, assignments, office hours, and lecture materials.",
-    tags: ["Teaching", "Courseware", "Students"],
+      "Demonstration application and quantization pipeline for Kannada regional dialect classification developed during research internship at SPIRE Lab, IISc. Connects speech processing pipelines to low-bit model quantization.",
+    architecture: [
+      "Streamlit web interface for real-time audio upload, MFCC spectral visualization, and dialect inference",
+      "Post-training quantization (PTQ) routines reducing model memory footprint for edge devices",
+      "Integration with RESPIN speech dataset and NeMo audio processing toolkits"
+    ],
+    tags: ["Speech ML", "Audio Signal Processing", "Quantization", "Streamlit", "IISc SPIRE Lab"],
     links: [
-      { label: "Site", href: "https://example.com/course" },
-      { label: "Slides", href: "https://example.com/course-slides" }
+      { label: "Code Repository", href: "https://github.com/Aditya-Maller/Spire-Dialect-Quantisation" }
+    ]
+  },
+  {
+    title: "SHRAVAN — Wearable Assistive Device for Visually Impaired",
+    status: "Public Good Prototype",
+    category: "Assistive Tech & Embedded CV",
+    summary:
+      "A wearable assistive technology solution combining computer vision object detection, text-to-speech optical character recognition, and haptic feedback to help visually impaired individuals navigate environments independently.",
+    architecture: [
+      "Real-time object detection model running on edge micro-processing hardware",
+      "Text recognition (OCR) engine mapping environmental signages to spoken audio feedback",
+      "Multi-sensor spatial range finder driving dynamic directional haptic vibration motors"
+    ],
+    tags: ["Computer Vision", "Assistive Tech", "OCR", "Audio/Haptics", "Edge Hardware"],
+    links: [
+      { label: "GitHub Profile", href: "https://github.com/Aditya-Maller/" }
     ]
   }
 ];

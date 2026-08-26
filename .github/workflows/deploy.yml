@@ -36,6 +36,9 @@ jobs:
       - name: Execute Production Build
         run: npm run build
 
+      - name: Prevent GitHub Pages Jekyll Processing
+        run: touch dist/.nojekyll
+
       - name: Verify Build Artifact Integrity
         run: |
           if [ ! -f dist/index.html ]; then

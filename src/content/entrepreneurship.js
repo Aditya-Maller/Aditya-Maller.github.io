@@ -13,18 +13,6 @@ export const entrepreneurship = [
     ]
   },
   {
-    title: "Assistive Technology Commercialization (SHRAVAN)",
-    context: "Product Ideation & Feasibility",
-    team: "Aditya S Maller & Co-developers",
-    summary:
-      "Explored converting the SHRAVAN computer vision wearable prototype into a viable assistive technology hardware product. Evaluated wearable ergonomics, unit manufacturing costs, and potential distribution channels.",
-    learnings: [
-      "Translating academic software/hardware prototypes into deployable products",
-      "Designing user interfaces for accessibility-first requirements",
-      "Product-market fit exploration in assistive healthcare technology"
-    ]
-  },
-  {
     title: "RUDRA Organization Building & Operations",
     context: "Student Organization Founding",
     team: "Founding Leadership Team",

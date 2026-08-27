@@ -1,10 +1,10 @@
 export const publicGood = [
   {
-    title: "SHRAVAN — Wearable Assistive Device for Visual Impairment",
+    title: "SHRAVAN — Assistive Tech Project (Team Collaborator)",
     type: "Assistive Technology",
     summary:
-      "Designed and prototyped a wearable solution pairing computer vision spatial detection with real-time text-to-speech optical character recognition and directional haptic feedback to assist visually impaired individuals.",
-    impact: "Provides accessible spatial navigation and environmental sign reading without reliance on high-cost proprietary devices."
+      "Contributed as part of a project team developing a wearable assistive tech prototype combining computer vision spatial detection with real-time text-to-speech OCR and directional haptic feedback to assist visually impaired individuals.",
+    impact: "Explored accessible spatial navigation and environmental sign reading solutions."
   },
   {
     title: "STEM Outreach & School Science Lectures",

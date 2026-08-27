@@ -50,21 +50,5 @@ export const projects = [
     links: [
       { label: "Code Repository", href: "https://github.com/Aditya-Maller/Spire-Dialect-Quantisation" }
     ]
-  },
-  {
-    title: "SHRAVAN — Wearable Assistive Device for Visually Impaired",
-    status: "Public Good Prototype",
-    category: "Assistive Tech & Embedded CV",
-    summary:
-      "A wearable assistive technology solution combining computer vision object detection, text-to-speech optical character recognition, and haptic feedback to help visually impaired individuals navigate environments independently.",
-    architecture: [
-      "Real-time object detection model running on edge micro-processing hardware",
-      "Text recognition (OCR) engine mapping environmental signages to spoken audio feedback",
-      "Multi-sensor spatial range finder driving dynamic directional haptic vibration motors"
-    ],
-    tags: ["Computer Vision", "Assistive Tech", "OCR", "Audio/Haptics", "Edge Hardware"],
-    links: [
-      { label: "GitHub Profile", href: "https://github.com/Aditya-Maller/" }
-    ]
   }
 ];

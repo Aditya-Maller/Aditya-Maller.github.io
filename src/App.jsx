@@ -64,14 +64,25 @@ function App() {
         Skip to content
       </a>
 
+      {/* Mobile Nav Backdrop */}
+      {menuOpen && (
+        <div className="mobile-nav-backdrop" onClick={() => setMenuOpen(false)} aria-hidden="true" />
+      )}
+
       {/* Header Bar */}
       <header className="site-header">
         <a className="brand" href="#hero" onClick={() => setActiveTab("hero")} aria-label="Aditya S Maller home">
           <div className="brand-badge">ASM</div>
-          <span>{siteMeta.brand}</span>
+          <span className="brand-name">{siteMeta.brand}</span>
           <span className="brand-affiliation">SPIRE Lab — IISc</span>
         </a>
         <nav className={`primary-nav ${menuOpen ? "is-open" : ""}`} aria-label="Primary navigation">
+          <div className="mobile-nav-header">
+            <span>Navigation Menu</span>
+            <button type="button" className="mobile-nav-close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+              <i className="fa-solid fa-xmark" aria-hidden="true" />
+            </button>
+          </div>
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -617,29 +628,64 @@ function EntrepreneurshipList() {
   );
 }
 
-/* 11. About Section */
+/* 11. About Section & Philosophy */
 function AboutSection() {
   return (
-    <div className="about-box">
-      <h3>Education & Profile</h3>
-      <p>
-        Currently pursuing a <strong>B.Tech in Computer Science & Engineering (AI & ML)</strong> at <strong>RV University</strong>, Bengaluru (2022 – 2026).
-      </p>
-      <p>
-        My technical trajectory combines academic empirical research with rigorous AI systems engineering. I believe software and machine learning solutions should be low on hype, high on measurable signal, and built directly to fulfill concrete business or research objectives.
-      </p>
+    <div className="about-wrapper">
+      {/* Life & Personal Philosophy Hero Card */}
+      <div className="philosophy-card">
+        <div className="philosophy-quote-header">
+          <i className="fa-solid fa-quote-left philosophy-quote-icon" aria-hidden="true" />
+          <span className="philosophy-badge">Core Life & Engineering Philosophy</span>
+        </div>
+        
+        <blockquote className="philosophy-quote">
+          &ldquo;You can escape reality, but you cannot escape the consequences of escaping reality.&rdquo;
+        </blockquote>
 
-      <h3>Research & Technical Philosophy</h3>
-      <ul>
-        <li><strong>Empirical Rigor:</strong> Every machine learning claim or algorithm decision must be backed by benchmark metrics (+10.9% ROUGE-L, BERTScore, Recall).</li>
-        <li><strong>Async Systems First:</strong> Building high-throughput API services (FastAPI, Redis caching, Celery task queues) that handle real-world latency and scale gracefully.</li>
-        <li><strong>Quantization & Edge ML:</strong> Reducing computational footprint for deployment on edge and resource-constrained environments (SPIRE Lab Kannada dialect models).</li>
-      </ul>
+        <div className="philosophy-pillars">
+          <div className="pillar-item">
+            <div className="pillar-icon">
+              <i className="fa-solid fa-compass" aria-hidden="true" />
+            </div>
+            <div>
+              <strong>Live Life to the Fullest</strong>
+              <p>Approach every endeavor with energy, ambition, and deep curiosity. Never shy away from hard engineering challenges or creative exploration.</p>
+            </div>
+          </div>
+          <div className="pillar-item">
+            <div className="pillar-icon">
+              <i className="fa-solid fa-earth-americas" aria-hidden="true" />
+            </div>
+            <div>
+              <strong>Benefit the World</strong>
+              <p>Strive to ensure that every achievement, research paper, and system built creates genuine, measurable value that improves people&apos;s lives.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h3>Interests Beyond Code</h3>
-      <p>
-        Studying business case studies, technology finance, organizational design, board game mechanics, and upcycling product design.
-      </p>
+      <div className="about-box">
+        <h3>Education & Profile</h3>
+        <p>
+          Currently pursuing a <strong>B.Tech in Computer Science & Engineering (AI & ML)</strong> at <strong>RV University</strong>, Bengaluru (2022 – 2026).
+        </p>
+        <p>
+          My technical trajectory combines academic empirical research with rigorous AI systems engineering. I believe software and machine learning solutions should be low on hype, high on measurable signal, and built directly to fulfill concrete business or research objectives.
+        </p>
+
+        <h3>Technical Principles</h3>
+        <ul>
+          <li><strong>Empirical Rigor:</strong> Every machine learning claim or algorithm decision must be backed by benchmark metrics (+10.9% ROUGE-L, BERTScore, Recall).</li>
+          <li><strong>Async Systems First:</strong> Building high-throughput API services (FastAPI, Redis caching, Celery task queues) that handle real-world latency and scale gracefully.</li>
+          <li><strong>Quantization & Edge ML:</strong> Reducing computational footprint for deployment on edge and resource-constrained environments (SPIRE Lab Kannada dialect models).</li>
+        </ul>
+
+        <h3>Interests Beyond Code</h3>
+        <p>
+          Studying business case studies, technology finance, organizational design, board game mechanics, and upcycling product design.
+        </p>
+      </div>
     </div>
   );
 }

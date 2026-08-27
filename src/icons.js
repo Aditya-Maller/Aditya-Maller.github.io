@@ -42,7 +42,9 @@ export const profileIconMap = {
   Bluesky: "fa-solid fa-link",
   Mastodon: "fa-solid fa-link",
   SemanticScholar: "fa-solid fa-book",
-  Twitter: "fa-solid fa-link"
+  Twitter: "fa-solid fa-link",
+  Code: "fa-solid fa-code",
+  Research: "fa-solid fa-flask"
 };
 
 export const fallbackTitleIcon = openBookIcon;

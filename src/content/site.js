@@ -21,10 +21,9 @@ export const sections = [
     note: "Peer-reviewed papers, preprints, and empirical research findings."
   },
   { id: "projects", title: "Engineered Systems", nav: "Systems" },
-  { id: "experience", title: "Research & Experience", nav: "Experience" },
+  { id: "experience", title: "Internship Experience", nav: "Internships" },
   { id: "leadership", title: "Leadership & Community", nav: "Leadership" },
   { id: "competitions", title: "Competitions & Hackathons", nav: "Competitions" },
-  { id: "public-good", title: "Public Good & Accessibility", nav: "Public Good" },
   { id: "entrepreneurship", title: "Entrepreneurship & Products", nav: "Entrepreneurship" },
   { id: "about", title: "Background & Philosophy", nav: "About" },
   { id: "references", title: "Academic Network", nav: "References" }

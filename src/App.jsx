@@ -6,11 +6,11 @@ import {
   education,
   entrepreneurship,
   experience,
+  languages,
   leadership,
   news,
   profile,
   projects,
-  publicGood,
   publicationGroups,
   publications,
   references,
@@ -176,31 +176,25 @@ function App() {
 
           {/* 6. Experience & Internships */}
           <section className="section experience-section" id="experience">
-            <SectionTitle title="Research & Experience" note="Academic research roles and professional engineering internships." />
+            <SectionTitle title="Internship Experience" note="Research internships, production software engineering, and industry project roles." />
             <ExperienceTimeline />
           </section>
 
           {/* 7. Leadership & Organization Building */}
           <section className="section leadership-section" id="leadership">
-            <SectionTitle title="Leadership & Community" note="Founding Vice President of RUDRA (Data Science Club), event hosting, and community mentorship." />
+            <SectionTitle title="Leadership & Community" note="Founding Vice President of RUDRA (Data Science & AI Club), scaling 0 to 300+ active members." />
             <LeadershipList />
           </section>
 
           {/* 8. Competitions & Hackathons */}
           <section className="section competitions-section" id="competitions">
-            <SectionTitle title="Competitions & Hackathons" note="Awards, hackathon wins, CTFs, and competitive data analysis results." />
+            <SectionTitle title="Competitions & Hackathons" note="1st Place Website Makeathon, 2nd Place Analytica, TAARA SIEM Malware Hackathon, and Shravan Multimodal AI." />
             <CompetitionsGrid />
           </section>
 
-          {/* 9. Public Good & Accessibility */}
-          <section className="section public-good-section" id="public-good">
-            <SectionTitle title="Public Good & Accessibility" note="Assistive technology for visual impairment and public STEM educational outreach." />
-            <PublicGoodList />
-          </section>
-
-          {/* 10. Entrepreneurship */}
+          {/* 9. Entrepreneurship */}
           <section className="section entrepreneurship-section" id="entrepreneurship">
-            <SectionTitle title="Entrepreneurship & Product Thinking" note="Sustainable product design, assistive technology commercialization, and organizational execution." />
+            <SectionTitle title="Entrepreneurship & Product Thinking" note="Goodwinsun CFO partnership, FKCCI Manthan Finalist, Elevate Karnataka pitching, and product commercialization." />
             <EntrepreneurshipList />
           </section>
 
@@ -667,49 +661,62 @@ function AboutSection() {
         <blockquote className="philosophy-quote">
           &ldquo;You can escape reality, but you cannot escape the consequences of escaping reality.&rdquo;
         </blockquote>
+        <p className="philosophy-subquote">
+          Achievement is rarely accidental. It requires taking bold, calculated risks, making decisive choices, and standing fully accountable for every outcome.
+        </p>
 
         <div className="philosophy-pillars">
           <div className="pillar-item">
             <div className="pillar-icon">
-              <i className="fa-solid fa-compass" aria-hidden="true" />
+              <i className="fa-solid fa-bolt" aria-hidden="true" />
             </div>
             <div>
-              <strong>Live Life to the Fullest</strong>
-              <p>Approach every endeavor with energy, ambition, and deep curiosity. Never shy away from hard engineering challenges or creative exploration.</p>
+              <strong>Calculated Risk & Bold Execution</strong>
+              <p>Progress favors the decisive. Embrace uncertainty, evaluate trade-offs, and execute with urgency to achieve meaningful breakthroughs.</p>
             </div>
           </div>
           <div className="pillar-item">
             <div className="pillar-icon">
-              <i className="fa-solid fa-earth-americas" aria-hidden="true" />
+              <i className="fa-solid fa-shield-halved" aria-hidden="true" />
             </div>
             <div>
-              <strong>Benefit the World</strong>
-              <p>Strive to ensure that every achievement, research paper, and system built creates genuine, measurable value that improves people&apos;s lives.</p>
+              <strong>Radical Ownership of Outcomes</strong>
+              <p>Own the decisions you make and face their consequences squarely. Never substitute wishful thinking or hype for empirical feedback.</p>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Education Breakdown & Languages Card */}
       <div className="about-box">
-        <h3>Education & Profile</h3>
-        <p>
-          Currently pursuing a <strong>B.Tech in Computer Science & Engineering (AI & ML)</strong> at <strong>RV University</strong>, Bengaluru (2022 – 2026).
-        </p>
-        <p>
-          My technical trajectory combines academic empirical research with rigorous AI systems engineering. I believe software and machine learning solutions should be low on hype, high on measurable signal, and built directly to fulfill concrete business or research objectives.
-        </p>
+        <h3>Education & Background</h3>
+        
+        <div className="education-list">
+          {education.map((edu) => (
+            <div key={edu.title} className="edu-card">
+              <div className="edu-head">
+                <strong>{edu.title}</strong>
+                <span className="edu-period">{edu.period}</span>
+              </div>
+              <p className="edu-place">{edu.place}</p>
+              <p className="edu-detail">{edu.detail}</p>
+              <div className="edu-tags">
+                {edu.tags?.map((t) => (
+                  <span key={t} className="tag-chip">{t}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
-        <h3>Technical Principles</h3>
-        <ul>
-          <li><strong>Empirical Rigor:</strong> Every machine learning claim or algorithm decision must be backed by benchmark metrics (+10.9% ROUGE-L, BERTScore, Recall).</li>
-          <li><strong>Async Systems First:</strong> Building high-throughput API services (FastAPI, Redis caching, Celery task queues) that handle real-world latency and scale gracefully.</li>
-          <li><strong>Quantization & Edge ML:</strong> Reducing computational footprint for deployment on edge and resource-constrained environments (SPIRE Lab Kannada dialect models).</li>
-        </ul>
-
-        <h3>Interests Beyond Code</h3>
-        <p>
-          Studying business case studies, technology finance, organizational design, board game mechanics, and upcycling product design.
-        </p>
+        <h3 className="languages-title">Languages Spoken</h3>
+        <div className="languages-chips">
+          {languages.map((lang) => (
+            <span key={lang} className="skill-chip language-chip">
+              <i className="fa-solid fa-language" aria-hidden="true" /> {lang}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

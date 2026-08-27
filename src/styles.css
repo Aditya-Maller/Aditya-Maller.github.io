@@ -1330,12 +1330,96 @@ button {
 }
 
 .philosophy-quote {
-  margin: 0 0 24px;
-  font-size: 1.22rem;
+  margin: 0 0 10px;
+  font-size: 1.25rem;
   font-weight: 600;
   font-style: italic;
   line-height: 1.6;
   color: var(--ink);
+}
+
+.philosophy-subquote {
+  margin: 0 0 24px;
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Education Breakdown Styling */
+.education-list {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.edu-card {
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+}
+
+.edu-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.edu-head strong {
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+
+.edu-period {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.edu-place {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  color: var(--subtle);
+  font-weight: 500;
+}
+
+.edu-detail {
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.edu-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.languages-title {
+  margin: 24px 0 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.languages-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.language-chip {
+  background: var(--blue-soft);
+  color: var(--blue);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.85rem;
 }
 
 .philosophy-pillars {

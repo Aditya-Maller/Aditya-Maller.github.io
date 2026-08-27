@@ -1,48 +1,49 @@
 export const experience = [
   {
-    period: "2024 - Present",
+    period: "June 2026 – Nov 2026",
     title: "Machine Learning Research Intern",
-    place: "SPIRE Lab — Indian Institute of Science (IISc)",
+    place: "SPIRE Lab — Indian Institute of Science (IISc), Bengaluru",
     href: "https://spire.ee.iisc.ac.in/",
     detail:
-      "Conducting research in speech and audio machine learning under Prof. Prasanta Kumar Ghosh. Focus areas include regional Kannada dialect classification, signal processing, and post-training quantization techniques for edge-deployed speech models.",
+      "Conducting research in speech and audio machine learning under Prof. Prasanta Kumar Ghosh. Studying audio quantization techniques and their impact on information retention in Indic language speech signals (IISc RESPIN Corpus). Performing Kannada dialect classification experiments across 5 regional dialect zones and benchmarking accuracy vs. low-bit model quantization compression trade-offs.",
     featured: true,
-    tags: ["IISc", "Speech ML", "Audio Signal Processing", "Quantization", "NeMo", "Research"]
+    tags: ["IISc SPIRE Lab", "Speech ML", "Audio Signal Processing", "RESPIN Corpus", "Quantization", "PyTorch"]
   },
   {
-    period: "2023 - 2024",
-    title: "AI/ML Engineering Intern",
+    period: "Jan 2026 – Apr 2026",
+    title: "Software Development Intern (Production AI Systems)",
     place: "Sri Aranea Technologies",
-    href: "https://github.com/Aditya-Maller/",
+    href: "https://www.possibleclients.com/",
     detail:
-      "Engineered machine learning pipelines, data preprocessing modules, and model deployment APIs for intelligent software solutions.",
-    tags: ["Machine Learning", "Python", "API Deployment", "Data Engineering"]
+      "Contributed to feature development, system design, and AI functional integrations for Possible Clients (possibleclients.com), a live production-grade full-stack web application. Operated in an Agile/Scrum framework using Jira for sprint planning, Postman for API testing and debugging, Git version control, and staging-to-production deployment workflows.",
+    featured: true,
+    tags: ["Possible Clients", "Production Systems", "Agile / Jira", "System Design", "API Testing (Postman)", "AI Workflows"]
   },
   {
-    period: "2023 - 2024",
-    title: "Quantum Computing & ML Research Intern",
-    place: "Quantum Research Group",
+    period: "Summer 2024 (Post-Sem 2)",
+    title: "Quantum Computing Research Intern",
+    place: "Quantum Computing & Simulation Research Group",
     href: "https://github.com/Aditya-Maller/",
     detail:
-      "Researched quantum entropy metrics and adaptive decoding temperature scaling for mitigating hallucinations in large language models. Co-authored research accepted for Springer publication.",
-    tags: ["Quantum ML", "Hallucination Mitigation", "LLMs", "Springer"]
+      "Completed an intensive 2-month summer quantum research internship. Built a custom Qiskit simulator modeling the Quantum Teleportation protocol (Alice-to-Bob qubit state transfer). Earned Microsoft Azure Certifications during this research period.",
+    tags: ["Quantum Computing", "Qiskit Simulator", "Quantum Teleportation", "Microsoft Azure Certified", "Python"]
   },
   {
-    period: "2023",
-    title: "Data Analysis & ML Intern",
-    place: "RV Dental College",
+    period: "Summer 2024 (Post-Sem 2)",
+    title: "Medical Data & Computer Vision Intern",
+    place: "RV Dental / Healthcare AI Research Project",
     href: "https://github.com/Aditya-Maller/",
     detail:
-      "Performed healthcare dataset statistical analysis, feature extraction, and predictive modeling for clinical research projects.",
-    tags: ["Data Analysis", "Healthcare ML", "Statistics"]
+      "2-month summer medical AI exploration internship analyzing clinical healthcare datasets and dental radiology imagery. Performed medical image annotation, data augmentation techniques, image segmentation experiments, and evaluated domain-specific AI/ML application patterns in healthcare.",
+    tags: ["Medical AI", "Computer Vision", "Data Augmentation", "Image Annotation", "Healthcare ML"]
   },
   {
-    period: "2022 - 2023",
-    title: "Software & Technical Intern",
-    place: "Ganglia Technologies",
+    period: "June 2025 – July 2025",
+    title: "Deep Learning Research Intern",
+    place: "Ganglia Technologies — MUTBI Incubator, Manipal",
     href: "https://github.com/Aditya-Maller/",
     detail:
-      "Contributed to software application development, backend database operations, and system quality assurance.",
-    tags: ["Software Engineering", "Backend", "Testing"]
+      "2-month deep learning research internship at Manipal University Technology Business Incubator (MUTBI). Engineered lightweight CNN variants for microscopic algae image classification. Conducted image processing experiments using CLAHE (Contrast Limited Adaptive Histogram Equalization) and morphological gradients on Google Colab and Drive pipelines to optimize parameter efficiency.",
+    tags: ["Deep Learning", "CNNs", "Image Processing (CLAHE)", "Google Colab", "MUTBI Manipal", "Lightweight ML"]
   }
 ];

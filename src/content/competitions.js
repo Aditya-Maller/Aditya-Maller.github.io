@@ -1,37 +1,32 @@
 export const competitions = [
   {
-    title: "Website Makeathon",
+    title: "1st Place — Website Makeathon",
     result: "1st Place Winner",
-    year: "2024",
-    organizer: "Technical Community",
-    detail: "Designed and developed an optimized web application under strict time constraints."
+    organizer: "RV University (Sem 1 Web Development Capstone)",
+    detail: "Awarded 1st place in the semester-end Web Development course Makeathon for designing and building an exceptional personal website architecture."
   },
   {
-    title: "RV University Data Analysis Competition",
+    title: "2nd Place — Analytica Data Contest",
     result: "2nd Place Winner",
-    year: "2024",
     organizer: "RV University",
-    detail: "Applied statistical exploratory data analysis, feature engineering, and model validation on complex datasets."
+    detail: "Secured 2nd place in 'Analytica', an inter-college data analytics competition focused on exploratory data analysis, predictive modeling, and statistical validation."
   },
   {
-    title: "Make4Mysore Hackathon",
-    result: "Finalist / Participant",
-    year: "2023",
-    organizer: "Make4Mysore Initiative",
-    detail: "Developed practical technology prototypes addressing regional infrastructure and civic challenges."
+    title: "TAARA — Real-Time SIEM Log Malware Detection",
+    result: "24-Hour RVU Hackathon Project",
+    organizer: "RV University 24-Hour Hackathon",
+    detail: "Built TAARA during a 24-hour hackathon: a deep learning security system that ingests SIEM network logs in real time to detect malware activity and anomalous behavior."
   },
   {
-    title: "Sridevi National Level Hackathon",
-    result: "Participant",
-    year: "2023",
-    organizer: "Sridevi Engineering Institutions",
-    detail: "Competed in rapid software prototyping and AI problem-solving."
+    title: "Shravan — Multimodal AI Vision Analysis System",
+    result: "Sem 2 Course Project",
+    organizer: "RV University (Course Project with Shravan)",
+    detail: "Developed Shravan: a multimodal AI vision application powered by Google Gemini API that ingests image streams for intelligent feature extraction and scene understanding."
   },
   {
-    title: "Capture the Flag (CTF) Competitions",
-    result: "Cybersecurity Participant",
-    year: "2023 - 2024",
-    organizer: "Various Platforms",
-    detail: "Solved cybersecurity challenges covering static binary analysis, reverse engineering, and web security."
+    title: "Inter-College Hackathons & CTFs",
+    result: "Active Competitor",
+    organizer: "Various Institutions",
+    detail: "Participated in 3 additional inter-college hackathons and cybersecurity Capture-The-Flag (CTF) contests focusing on rapid prototyping and AI system design."
   }
 ];

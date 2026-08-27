@@ -1,5 +1,11 @@
 export const competitions = [
   {
+    title: "Best Project Award — Structured Innovation Board Game",
+    result: "Best Project Award (70/70 Internals)",
+    organizer: "RV University (Structured Innovation Course)",
+    detail: "Awarded Best Project Award in the course cohort for building a unique, interactive board game applying structured innovation methodology, product design, game mechanics, upcycling, and design thinking under Prof. Phani Kumar Pullela, Prof. Chidhanand R.S., and Prof. Ramesha G N."
+  },
+  {
     title: "1st Place — Website Makeathon",
     result: "1st Place Winner",
     organizer: "RV University (Sem 1 Web Development Capstone)",

@@ -50,5 +50,20 @@ export const projects = [
     links: [
       { label: "Code Repository", href: "https://github.com/Aditya-Maller/Spire-Dialect-Quantisation" }
     ]
+  },
+  {
+    title: "Structured Innovation Board Game & Design Thinking",
+    status: "Cohort Winner & Best Project Award",
+    category: "Product Design & Innovation",
+    summary:
+      "Designed and fabricated an interactive, strategic board game applying structured innovation methodology, game mechanics, upcycling, and design thinking. Built for the Semester 1 Structured Innovation course under the guidance of Prof. Phani Kumar Pullela, Prof. Chidhanand R.S., Prof. Ramesha G N, and Dean Prof. Sanjay Chitnis, winning the Best Project Award in the cohort and scoring 70/70 for internal evaluations.",
+    architecture: [
+      "Formulated strategic game mechanics, rulebook design, and interactive board mechanics",
+      "Applied structured innovation frameworks, upcycling design principles, and product marketing concepts",
+      "Achieved a 70/70 internal evaluation score and awarded Best Project Award in the course cohort"
+    ],
+    metrics: "Best Project Award | 70/70 Internal Score",
+    tags: ["Structured Innovation", "Product Design", "Game Mechanics", "Upcycling", "Design Thinking", "Cohort Winner"],
+    links: []
   }
 ];

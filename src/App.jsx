@@ -261,6 +261,9 @@ function SidebarProfile() {
           </a>
         ))}
       </div>
+      <a className="btn btn-outline sidebar-resume-btn" href={profile.resumeUrl} target="_blank" rel="noreferrer">
+        <i className="fa-solid fa-file-pdf" aria-hidden="true" /> View Resume (PDF)
+      </a>
 
       <div className="sidebar-block">
         <h2>Primary Focus</h2>
@@ -314,6 +317,9 @@ function ExecutiveHero() {
         </a>
         <a className="btn btn-secondary" href="#projects">
           <i className="fa-solid fa-code" aria-hidden="true" /> View Systems Built
+        </a>
+        <a className="btn btn-gold" href={profile.resumeUrl} target="_blank" rel="noreferrer">
+          <i className="fa-solid fa-file-pdf" aria-hidden="true" /> Resume (PDF)
         </a>
         <a className="btn btn-outline" href="https://github.com/Aditya-Maller/" target="_blank" rel="noreferrer">
           <i className="fa-brands fa-github" aria-hidden="true" /> GitHub

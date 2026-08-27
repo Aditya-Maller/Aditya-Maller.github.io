@@ -66,11 +66,15 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--page-bg);
   color: var(--ink);
   line-height: 1.6;
@@ -110,7 +114,7 @@ button {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 1000;
   height: 68px;
   display: flex;
   align-items: center;
@@ -167,19 +171,18 @@ button {
 .primary-nav {
   display: flex;
   align-items: center;
-  gap: 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.primary-nav::-webkit-scrollbar {
-  display: none;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  justify-content: flex-end;
+  margin: 0 12px;
+  overflow: hidden;
 }
 
 .primary-nav a {
-  padding: 6px 10px;
+  padding: 5px 7px;
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: 0.81rem;
   font-weight: 500;
   color: var(--muted);
   white-space: nowrap;
@@ -220,7 +223,7 @@ button {
 .mobile-nav-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 90;
+  z-index: 990;
   background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(4px);
   animation: fadeIn 200ms ease;
@@ -525,11 +528,33 @@ button {
 .btn-outline {
   border: 1px solid var(--border);
   color: var(--muted);
+  background: var(--control-bg);
 }
 .btn-outline:hover {
+  border-color: var(--blue);
   color: var(--ink);
-  border-color: var(--muted);
   text-decoration: none;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #d97706, #fbbf24);
+  color: #0f172a;
+  font-weight: 700;
+  border: none;
+}
+.btn-gold:hover {
+  background: linear-gradient(135deg, #b45309, #f59e0b);
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.sidebar-resume-btn {
+  width: 100%;
+  margin-top: 12px;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 8px 12px;
 }
 
 /* 2. Technical Snapshot Grid */
@@ -1300,13 +1325,13 @@ button {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1280px) {
   .brand-affiliation {
     display: none;
   }
 }
 
-@media (max-width: 820px) {
+@media (max-width: 1150px) {
   .primary-nav {
     position: fixed;
     top: 0;
@@ -1314,7 +1339,7 @@ button {
     bottom: 0;
     width: 290px;
     max-width: 85vw;
-    z-index: 100;
+    z-index: 1001;
     background: var(--surface);
     border-left: 1px solid var(--border);
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
@@ -1323,14 +1348,19 @@ button {
     justify-content: flex-start;
     padding: 24px 20px;
     gap: 6px;
+    margin: 0;
     transform: translateX(100%);
-    transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), visibility 250ms;
     overflow-y: auto;
   }
 
   .primary-nav.is-open {
     display: flex;
     transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .mobile-nav-header {
@@ -1389,3 +1419,33 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 600px) {
+  :root {
+    --section: calc(100vw - 24px);
+  }
+  .site-header {
+    padding: 0 16px;
+  }
+  .page-shell {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    gap: 24px;
+  }
+  .hero-headline {
+    font-size: 1.55rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .philosophy-card {
+    padding: 20px 16px;
+  }
+}
+

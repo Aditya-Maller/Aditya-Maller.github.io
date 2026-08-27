@@ -7,6 +7,7 @@ export const profile = {
   location: "Bengaluru, Karnataka, India",
   email: "",
   avatar: "",
+  resumeUrl: "https://drive.google.com/file/d/1RstwmBTkZaAcBoF5V_my1s5QBtlocRr3/view?usp=sharing",
   focus: [
     "Machine Learning",
     "Generative AI & LLMs",
@@ -21,6 +22,7 @@ export const profile = {
     "Published research on LLM adaptive temperature scaling (Springer) and dynamic decoding temperature prediction via transformer representations (+10.9% ROUGE-L, +5.7% BERTScore)."
   ],
   links: [
+    { label: "Resume (PDF)", href: "https://drive.google.com/file/d/1RstwmBTkZaAcBoF5V_my1s5QBtlocRr3/view?usp=sharing", icon: "Resume" },
     { label: "GitHub", href: "https://github.com/Aditya-Maller/", icon: "GitHub" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/aditya-s-maller-851895292/", icon: "LinkedIn" },
     { label: "FastRAG Repo", href: "https://github.com/Aditya-Maller/Rag-based-chatbot-fastapi-project", icon: "Code" },

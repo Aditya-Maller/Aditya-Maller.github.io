@@ -1,5 +1,5 @@
 export { profile } from "./profile.js";
-export { news } from "./news.js";
+export { timelineEvents } from "./timeline.js";
 export { publications } from "./publications.js";
 export { projects } from "./projects.js";
 export { talks } from "./talks.js";

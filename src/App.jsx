@@ -8,14 +8,14 @@ import {
   experience,
   languages,
   leadership,
-  news,
   profile,
   projects,
   publicationGroups,
   publications,
   references,
   sections,
-  siteMeta
+  siteMeta,
+  timelineEvents
 } from "./content/index.js";
 import {
   fallbackTitleIcon,
@@ -288,12 +288,16 @@ function SidebarProfile() {
       </div>
 
       <div className="sidebar-block">
-        <h2>Recent News</h2>
-        <div className="sidebar-news">
-          {news.slice(0, 4).map((item) => (
-            <a key={item.text} href={item.href} target="_blank" rel="noreferrer">
-              <time>{item.date}</time>
-              <span className="sidebar-news-text">{item.text}</span>
+        <h2>Timeline of Key Events</h2>
+        <div className="sidebar-timeline">
+          {timelineEvents.map((item) => (
+            <a key={item.title} href={item.href} className="sidebar-timeline-item">
+              <div className="timeline-item-head">
+                <span className={`timeline-type-pill ${item.type.toLowerCase()}`}>{item.type}</span>
+                <time>{item.date}</time>
+              </div>
+              <strong className="timeline-item-title">{item.title}</strong>
+              <span className="sidebar-timeline-gist">{item.gist}</span>
             </a>
           ))}
         </div>

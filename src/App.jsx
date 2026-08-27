@@ -69,20 +69,15 @@ function App() {
         <div className="mobile-nav-backdrop" onClick={() => setMenuOpen(false)} aria-hidden="true" />
       )}
 
-      {/* Header Bar */}
-      <header className="site-header">
-        <a className="brand" href="#hero" onClick={() => setActiveTab("hero")} aria-label="Aditya S Maller home">
-          <div className="brand-badge">ASM</div>
-          <span className="brand-name">{siteMeta.brand}</span>
-          <span className="brand-affiliation">SPIRE Lab — IISc</span>
-        </a>
-        <nav className={`primary-nav ${menuOpen ? "is-open" : ""}`} aria-label="Primary navigation">
-          <div className="mobile-nav-header">
-            <span>Navigation Menu</span>
-            <button type="button" className="mobile-nav-close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
-              <i className="fa-solid fa-xmark" aria-hidden="true" />
-            </button>
-          </div>
+      {/* Mobile Nav Drawer (Root level for reliable mobile rendering) */}
+      <aside className={`mobile-nav-drawer ${menuOpen ? "is-open" : ""}`} aria-label="Mobile navigation">
+        <div className="mobile-nav-header">
+          <span>Navigation Menu</span>
+          <button type="button" className="mobile-nav-close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+            <i className="fa-solid fa-xmark" aria-hidden="true" />
+          </button>
+        </div>
+        <div className="mobile-nav-links">
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -96,7 +91,31 @@ function App() {
               {item.label}
             </a>
           ))}
+        </div>
+      </aside>
+
+      {/* Header Bar */}
+      <header className="site-header">
+        <a className="brand" href="#hero" onClick={() => setActiveTab("hero")} aria-label="Aditya S Maller home">
+          <div className="brand-badge">ASM</div>
+          <span className="brand-name">{siteMeta.brand}</span>
+          <span className="brand-affiliation">SPIRE Lab — IISc</span>
+        </a>
+
+        {/* Desktop Primary Nav */}
+        <nav className="primary-nav desktop-nav" aria-label="Primary navigation">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={activeTab === item.id ? "active" : ""}
+              onClick={() => setActiveTab(item.id)}
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
+
         <div className="header-actions">
           <button
             className="theme-button"

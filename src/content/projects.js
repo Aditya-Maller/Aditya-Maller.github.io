@@ -1,18 +1,18 @@
 export const projects = [
   {
-    title: "FastRAG — Asynchronous High-Performance RAG Architecture",
-    status: "Production Ready",
+    title: "FastRAG — Async RAG Knowledge Engine",
+    status: "Completed",
     category: "Generative AI Systems",
     summary:
-      "An asynchronous full-stack Retrieval-Augmented Generation (RAG) backend engine. Built with FastAPI for concurrent async requests, MongoDB native vector similarity retrieval, Gemini synthesis, Redis query caching, Celery async indexing task queues, and Docker containerization.",
+      "An asynchronous full-stack Retrieval-Augmented Generation (RAG) knowledge engine for domain-specific question answering. Implements a custom cosine-similarity retrieval pipeline over 384-dimensional Hugging Face embeddings in MongoDB, paired with Google Gemini 2.5 Flash answer generation and dual hallucination gates (0.50 similarity threshold and strict context-bound generation).",
     architecture: [
-      "Asynchronous API layer built on FastAPI with async/await database connectors",
-      "MongoDB native vector search for fast cosine similarity vector retrieval",
-      "Redis caching layer for query embeddings to reduce redundant LLM calls",
-      "Celery worker pool for background document chunking and vector ingestion",
-      "Multi-stage Docker build pipeline for reproducible deployment"
+      "FastAPI asynchronous REST backend for non-blocking API query processing",
+      "Hugging Face sentence-transformers/all-MiniLM-L6-v2 model generating 384-dimensional dense embeddings",
+      "MongoDB document and vector persistence with custom cosine-similarity aggregation pipeline (top-3 chunk retrieval)",
+      "Dual hallucination protection: 0.50 similarity threshold gate (bypasses LLM call if unmet) and strict context-bound prompting",
+      "Google Gemini 2.5 Flash for grounded answer synthesis paired with an interactive Streamlit frontend"
     ],
-    tags: ["FastAPI", "MongoDB Vector Search", "Gemini", "Redis", "Celery", "Docker", "Python"],
+    tags: ["FastAPI", "MongoDB", "Google Gemini 2.5 Flash", "Hugging Face", "Streamlit", "Python"],
     links: [
       { label: "Code Repository", href: "https://github.com/Aditya-Maller/Rag-based-chatbot-fastapi-project" }
     ]

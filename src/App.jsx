@@ -365,7 +365,7 @@ function TechnicalSnapshot() {
     {
       title: "Systems & Engineering",
       icon: "fa-solid fa-server",
-      skills: ["Python", "PyTorch", "FastAPI (Async)", "MongoDB (Vector Retrieval)", "Redis Caching", "Celery Async Tasks", "Docker", "LightGBM", "Flask", "React"]
+      skills: ["Python", "PyTorch", "FastAPI (Async)", "MongoDB", "Hugging Face Embeddings", "Streamlit", "Docker", "LightGBM", "Flask", "React"]
     },
     {
       title: "Evaluation & Methodology",
@@ -403,9 +403,9 @@ function EvidenceHighlights() {
       link: "#experience"
     },
     {
-      title: "FastRAG Backend Architecture",
-      badge: "GenAI Production System",
-      desc: "Independent full-stack asynchronous RAG system with FastAPI, MongoDB native vector similarity retrieval, Gemini synthesis, Redis caching, Celery task queues, and multi-stage Docker containerization.",
+      title: "FastRAG — Async RAG Knowledge Engine",
+      badge: "GenAI System",
+      desc: "Full-stack asynchronous RAG system built with FastAPI, MongoDB, Hugging Face 384-dim embeddings, custom cosine-similarity aggregation (top-3 retrieval), Google Gemini 2.5 Flash, Streamlit, and dual 0.50 similarity hallucination gates.",
       link: "#projects"
     },
     {

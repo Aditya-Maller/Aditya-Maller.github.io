@@ -14,7 +14,7 @@ export const news = [
   {
     date: "2024.05",
     icon: "release",
-    text: "Released FastRAG: Asynchronous FastAPI RAG backend with MongoDB vector search & Docker.",
+    text: "Released FastRAG: Asynchronous RAG knowledge engine with FastAPI, custom MongoDB cosine-similarity, Hugging Face embeddings & Gemini 2.5 Flash.",
     href: "https://github.com/Aditya-Maller/Rag-based-chatbot-fastapi-project"
   },
   {

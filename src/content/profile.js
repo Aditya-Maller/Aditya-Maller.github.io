@@ -7,7 +7,7 @@ export const profile = {
   location: "Bengaluru, Karnataka, India",
   email: "",
   avatar: "",
-  resumeUrl: "https://drive.google.com/file/d/1RstwmBTkZaAcBoF5V_my1s5QBtlocRr3/view?usp=sharing",
+  resumeUrl: "https://drive.google.com/file/d/13hwt-WsrCPYg3-wtIhiW7TjfYfLpaM0C/view?usp=sharing",
   focus: [
     "Machine Learning",
     "Generative AI & LLMs",
@@ -18,11 +18,11 @@ export const profile = {
   highlightNames: ["Aditya S Maller", "Aditya Maller"],
   about: [
     "AI/ML Research Engineer operating at the intersection of Machine Learning, Generative AI / LLMs, Speech & Audio Signal Processing, and High-Performance AI Systems Engineering.",
-    "Currently researching speech/audio ML, Kannada dialect classification, and speech model quantization at SPIRE Lab, Indian Institute of Science (IISc). Built production-grade GenAI systems like FastRAG (asynchronous FastAPI + MongoDB Vector Search) and LightGBM static malware interception frameworks.",
+    "Currently researching speech/audio ML, Kannada dialect classification, and speech model quantization at SPIRE Lab, Indian Institute of Science (IISc). Built GenAI systems like FastRAG (asynchronous FastAPI + custom MongoDB cosine-similarity RAG engine with Gemini 2.5 Flash) and LightGBM static malware interception frameworks.",
     "Published research on LLM adaptive temperature scaling (Springer) and dynamic decoding temperature prediction via transformer representations (+10.9% ROUGE-L, +5.7% BERTScore)."
   ],
   links: [
-    { label: "Resume (PDF)", href: "https://drive.google.com/file/d/1RstwmBTkZaAcBoF5V_my1s5QBtlocRr3/view?usp=sharing", icon: "Resume" },
+    { label: "Resume (PDF)", href: "https://drive.google.com/file/d/13hwt-WsrCPYg3-wtIhiW7TjfYfLpaM0C/view?usp=sharing", icon: "Resume" },
     { label: "GitHub", href: "https://github.com/Aditya-Maller/", icon: "GitHub" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/aditya-s-maller-851895292/", icon: "LinkedIn" },
     { label: "FastRAG Repo", href: "https://github.com/Aditya-Maller/Rag-based-chatbot-fastapi-project", icon: "Code" },

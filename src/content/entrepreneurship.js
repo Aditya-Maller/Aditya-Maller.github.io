@@ -1,15 +1,15 @@
 export const entrepreneurship = [
   {
-    title: "Goodwinsun — Partnership & Financial Leadership",
+    title: "Goodwinsun.ai — Partnership & Financial Leadership",
     context: "Commercial Product Venture & Government Initiatives",
     role: "Co-Founder & Chief Financial Officer (CFO)",
-    details: "Formally established with Partnership Deed. Serving as Chief Financial Officer (CFO), managing financial modeling, unit economics, and product commercialization.",
+    details: "Formally established post-Semester 5 with Partnership Deed. Serving as Co-Founder & CFO, managing financial modeling, unit economics, venture finance, and product commercialization.",
     summary:
-      "Pitching Goodwinsun commercial hardware/software products to state and national government initiatives including Elevate Karnataka and FKCCI Manthan (Federation of Karnataka Chambers of Commerce & Industry), successfully reaching the Final Round in FKCCI Manthan.",
+      "Represented Goodwinsun.ai pitching Sangithub (collaborative version-control platform for musicians) at the FKCCI Inno Manthan 2026 Grand Finale at Vidhana Soudha, Bengaluru, securing 6th place and an INR 70,000 Special Grant. Also pitched to state initiatives including Elevate Karnataka.",
     learnings: [
-      "FKCCI Manthan Finalist & Elevate Karnataka pitching",
-      "Partnership deed execution and CFO financial management",
-      "Product commercialization, unit economics, and government grant pitching"
+      "6th Place & INR 70,000 Special Grant at FKCCI Inno Manthan 2026 (Vidhana Soudha)",
+      "Pitched Sangithub — collaborative version-control platform for musicians",
+      "Partnership deed execution, CFO financial management, and venture commercialization"
     ]
   },
   {

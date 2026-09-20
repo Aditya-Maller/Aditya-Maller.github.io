@@ -1,10 +1,10 @@
 export const talks = [
   {
     period: "2024.04",
-    title: "FastRAG & Asynchronous Vector Search Architectures",
+    title: "FastRAG & Asynchronous RAG Pipeline Architectures",
     place: "RUDRA Technical Workshop",
     href: "https://github.com/Aditya-Maller/Rag-based-chatbot-fastapi-project",
-    detail: "Technical talk on building non-blocking FastAPI retrieval pipelines and vector similarity indexing.",
+    detail: "Technical talk on building non-blocking FastAPI retrieval pipelines and custom cosine-similarity aggregation inside MongoDB.",
     type: "Workshop"
   },
   {

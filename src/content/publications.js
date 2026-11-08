@@ -1,5 +1,23 @@
 export const publications = [
   {
+    title: "Scalable quantum circuit for Zeno-enhanced interaction-free quantum sensing",
+    venue: "AVS Quantum Science (AIP Publishing) — Q1 Journal",
+    year: "2026",
+    type: "Journal",
+    group: "Quantum ML",
+    authors: "R. Sujay, Aditya S. Maller (2nd Author), Sujay V. Kulkarni, Nishita Manohar Hosea, Bharath Manchikodi, Jayavrinda Vrindavanam, P. C. Deshmukh",
+    summary:
+      "Q1 journal publication on a scalable two-qubit quantum circuit leveraging the quantum Zeno effect for interaction-free sensing. Contributed to building simulations and developing quantum computing fundamentals for this work under Dr. P. C. Deshmukh.",
+    tags: ["Quantum Computing", "Quantum Zeno Effect", "Quantum Circuits", "Interaction-Free Sensing", "Q1 Journal"],
+    metricsBadge: "Q1 Journal | 2nd Author",
+    image: "",
+    featured: true,
+    links: [
+      { label: "Paper (AIP)", href: "https://pubs.aip.org/avs/aqs/article-abstract/8/4/044402/3406806/Scalable-quantum-circuit-for-Zeno-enhanced?redirectedFrom=fulltext" },
+      { label: "DOI", href: "https://doi.org/10.1116/5.0343736" }
+    ]
+  },
+  {
     title: "Quantum Entropy-Driven Temperature Scaling for Hallucination Mitigation in Generative Models",
     venue: "Springer Conference Proceedings (ICAICS 2025)",
     year: "2025",

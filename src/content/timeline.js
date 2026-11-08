@@ -1,5 +1,13 @@
 export const timelineEvents = [
   {
+    date: "2026",
+    type: "Publication",
+    title: "AVS Quantum Science Q1 Journal (2nd Author)",
+    gist: "Published 'Scalable quantum circuit for Zeno-enhanced interaction-free quantum sensing' (AIP) — built simulations and quantum computing fundamentals under Dr. P. C. Deshmukh.",
+    href: "#publications",
+    icon: "fa-solid fa-atom"
+  },
+  {
     date: "Jun 2026 – Nov 2026",
     type: "Internship",
     title: "SPIRE Lab, IISc Research Intern",

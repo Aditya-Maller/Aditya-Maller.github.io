@@ -1,5 +1,11 @@
 export const news = [
   {
+    date: "2026",
+    icon: "accepted",
+    text: "Published Q1 journal paper (2nd Author) in AVS Quantum Science (AIP): 'Scalable quantum circuit for Zeno-enhanced interaction-free quantum sensing' under Dr. P. C. Deshmukh.",
+    href: "https://pubs.aip.org/avs/aqs/article-abstract/8/4/044402/3406806/Scalable-quantum-circuit-for-Zeno-enhanced?redirectedFrom=fulltext"
+  },
+  {
     date: "2024.08",
     icon: "career",
     text: "Joined SPIRE Lab at Indian Institute of Science (IISc) as Machine Learning Research Intern.",

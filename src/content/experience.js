@@ -5,9 +5,9 @@ export const experience = [
     place: "SPIRE Lab — Indian Institute of Science (IISc), Bengaluru",
     href: "https://spire.ee.iisc.ac.in/",
     detail:
-      "Conducting research in speech and audio machine learning under Prof. Prasanta Kumar Ghosh. Studying audio quantization techniques and their impact on information retention in Indic language speech signals (IISc RESPIN Corpus). Performing Kannada dialect classification experiments across 5 regional dialect zones and benchmarking accuracy vs. low-bit model quantization compression trade-offs.",
+      "Conducting speech and audio ML research under Prof. Prasanta Kumar Ghosh. Worked on Conformer-based speech modeling, Kannada dialect classification across 5 regional zones, and speech model quantization on the IISc RESPIN corpus, studying information retention and accuracy–compression trade-offs. Currently building a joint ASR-DID (Automatic Speech Recognition + Dialect Identification) pipeline that improves ASR capacity with dialect features; the model is built, and I am distilling parts of it to reduce inference time, parameter count, and compute.",
     featured: true,
-    tags: ["IISc SPIRE Lab", "Speech ML", "Audio Signal Processing", "RESPIN Corpus", "Quantization", "PyTorch"]
+    tags: ["IISc SPIRE Lab", "Speech ML", "Conformer", "ASR", "Dialect Identification", "Model Distillation", "RESPIN Corpus", "Quantization", "PyTorch"]
   },
   {
     period: "Jan 2026 – Apr 2026",

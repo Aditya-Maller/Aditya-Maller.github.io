@@ -52,16 +52,16 @@ export const publications = [
     ]
   },
   {
-    title: "Kannada Dialect Classification & Speech Model Quantization Framework",
+    title: "Joint ASR-DID Pipeline with Conformer Dialect Modeling & Quantization (SPIRE Lab)",
     venue: "SPIRE Lab — Indian Institute of Science (IISc)",
     year: "2026",
     type: "Technical Research & Open-Source Code",
     group: "Speech & Audio ML",
     authors: "Aditya S Maller (IISc SPIRE Lab Research Intern)",
     summary:
-      "Speech signal processing, feature extraction, and post-training quantization for NeMo Conformer ONNX models on the IISc RESPIN Corpus across 5 Kannada regional dialect zones.",
-    tags: ["Speech Processing", "Audio ML", "Quantization", "IISc SPIRE Lab", "RESPIN Corpus"],
-    metricsBadge: "IISc SPIRE Lab Research",
+      "Speech ML research spanning Conformer-based Kannada dialect classification across 5 regional zones and speech model quantization on the IISc RESPIN corpus (NeMo/ONNX workflows). Current work builds a joint ASR-DID (Automatic Speech Recognition + Dialect Identification) pipeline that improves ASR capacity with dialect features; the model is built, with ongoing distillation to reduce inference time, parameter count, and compute.",
+    tags: ["ASR", "Dialect Identification", "Conformer", "Speech Processing", "Model Distillation", "Quantization", "IISc SPIRE Lab", "RESPIN Corpus"],
+    metricsBadge: "IISc SPIRE Lab Research | ASR-DID Distillation",
     image: "",
     featured: true,
     links: [

@@ -325,7 +325,7 @@ function ExecutiveHero() {
       </p>
 
       <p className="hero-summary">
-        Operating at the intersection of <strong>Machine Learning</strong>, <strong>Generative AI / LLMs</strong>, <strong>Speech & Audio Signal Processing</strong>, and <strong>High-Performance AI Systems Engineering</strong>. Currently researching speech ML, regional Kannada dialect classification, and model quantization at SPIRE Lab, Indian Institute of Science (IISc).
+        Operating at the intersection of <strong>Machine Learning</strong>, <strong>Generative AI / LLMs</strong>, <strong>Speech & Audio Signal Processing</strong>, and <strong>High-Performance AI Systems Engineering</strong>. Currently building a joint <strong>ASR-DID (Automatic Speech Recognition + Dialect Identification)</strong> pipeline at SPIRE Lab, Indian Institute of Science (IISc), using Conformer-based speech modeling and Kannada dialect features to improve ASR, and distilling parts of it to reduce inference time, parameters, and compute.
       </p>
 
       <div className="hero-actions">
@@ -360,7 +360,7 @@ function TechnicalSnapshot() {
     {
       title: "Speech & Audio ML",
       icon: "fa-solid fa-waveform",
-      skills: ["Speech Signal Processing", "Audio ML", "Dialect Classification", "Model Quantization", "NVIDIA NeMo", "RESPIN Framework"]
+      skills: ["Speech Signal Processing", "Audio ML", "Dialect Classification", "Conformer Models", "ASR & Dialect Identification", "Model Distillation & Quantization", "NVIDIA NeMo", "RESPIN Framework"]
     },
     {
       title: "Systems & Engineering",
@@ -399,7 +399,7 @@ function EvidenceHighlights() {
     {
       title: "SPIRE Lab — IISc Research Internship",
       badge: "IISc Research Role",
-      desc: "Machine Learning Research Intern at SPIRE Lab, Indian Institute of Science (IISc). Working on speech/audio ML, Kannada regional dialect classification, and deep learning model quantization for resource-constrained speech recognition.",
+      desc: "Machine Learning Research Intern at SPIRE Lab, Indian Institute of Science (IISc). Worked on Conformer-based speech modeling, Kannada regional dialect classification on the RESPIN corpus, and speech model quantization. Currently building a joint ASR-DID pipeline that improves ASR capacity with dialect features, with model distillation to reduce inference time, parameters, and compute.",
       link: "#experience"
     },
     {

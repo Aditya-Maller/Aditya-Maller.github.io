@@ -11,7 +11,7 @@ export const timelineEvents = [
     date: "Jun 2026 – Nov 2026",
     type: "Internship",
     title: "SPIRE Lab, IISc Research Intern",
-    gist: "Speech audio quantization & regional Kannada dialect classification across 5 zones (IISc RESPIN Corpus).",
+    gist: "Conformer-based Kannada dialect classification & quantization (RESPIN); now distilling a joint ASR-DID pipeline to improve ASR with dialect features and reduce inference cost.",
     href: "#experience",
     icon: "fa-solid fa-building-columns"
   },

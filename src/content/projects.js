@@ -36,17 +36,33 @@ export const projects = [
     ]
   },
   {
+    title: "Joint ASR-DID Pipeline Distillation (SPIRE Lab, IISc)",
+    status: "In Progress",
+    category: "Speech / Audio ML",
+    summary:
+      "Joint Automatic Speech Recognition + Dialect Identification (ASR-DID) pipeline that improves ASR capacity using dialect features. Builds on prior Conformer-based Kannada dialect classification and speech model work at SPIRE Lab, IISc; the model is built, and current work focuses on distilling parts of it to reduce inference time, parameter count, and compute.",
+    architecture: [
+      "Joint ASR-DID modeling to leverage dialect features for stronger ASR performance",
+      "Builds on Conformer-based speech modeling, Kannada dialect classification (5 regional zones), and speech model quantization on the IISc RESPIN corpus",
+      "Model distillation of pipeline components targeting lower inference latency, fewer parameters, and reduced compute cost"
+    ],
+    tags: ["ASR", "Dialect Identification", "Conformer", "Model Distillation", "Speech ML", "IISc SPIRE Lab", "RESPIN Corpus", "PyTorch"],
+    links: [
+      { label: "Related Research Code", href: "https://github.com/Aditya-Maller/Spire-Dialect-Quantisation" }
+    ]
+  },
+  {
     title: "SPIRE Dialect Classification & Quantization Demo UI",
     status: "Research Demo",
     category: "Speech / Audio ML",
     summary:
-      "Demonstration application and quantization pipeline for Kannada regional dialect classification developed during research internship at SPIRE Lab, IISc. Connects speech processing pipelines to low-bit model quantization.",
+      "Demonstration application and quantization pipeline for Kannada regional dialect classification developed during research internship at SPIRE Lab, IISc. Built alongside Conformer-based dialect modeling and post-training quantization experiments.",
     architecture: [
       "Streamlit web interface for real-time audio upload, MFCC spectral visualization, and dialect inference",
       "Post-training quantization (PTQ) routines reducing model memory footprint for edge devices",
       "Integration with RESPIN speech dataset and NeMo audio processing toolkits"
     ],
-    tags: ["Speech ML", "Audio Signal Processing", "Quantization", "Streamlit", "IISc SPIRE Lab"],
+    tags: ["Speech ML", "Audio Signal Processing", "Conformer", "Quantization", "Streamlit", "IISc SPIRE Lab"],
     links: [
       { label: "Code Repository", href: "https://github.com/Aditya-Maller/Spire-Dialect-Quantisation" }
     ]

@@ -9,10 +9,10 @@ export const talks = [
   },
   {
     period: "2024.02",
-    title: "Introduction to Speech Signal Processing & Model Quantization",
+    title: "Speech Signal Processing, Conformer Dialect Modeling & Quantization",
     place: "RV University AI Seminar",
     href: "https://github.com/Aditya-Maller/Spire-Dialect-Quantisation",
-    detail: "Overview of spectral audio features, MFCC extraction, and post-training quantization.",
+    detail: "Overview of spectral audio features, MFCC extraction, Conformer-based dialect modeling, and post-training quantization for speech systems.",
     type: "Seminar"
   }
 ];

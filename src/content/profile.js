@@ -12,14 +12,15 @@ export const profile = {
     "Machine Learning",
     "Generative AI & LLMs",
     "Speech & Audio ML",
-    "Model Quantization",
+    "ASR & Dialect Modeling",
+    "Model Distillation & Quantization",
     "FastAPI & AI Systems"
   ],
   highlightNames: ["Aditya S Maller", "Aditya Maller"],
   about: [
     "AI/ML Research Engineer operating at the intersection of Machine Learning, Generative AI / LLMs, Speech & Audio Signal Processing, and High-Performance AI Systems Engineering.",
-    "Currently researching speech/audio ML, Kannada dialect classification, and speech model quantization at SPIRE Lab, Indian Institute of Science (IISc). Built GenAI systems like FastRAG (asynchronous FastAPI + custom MongoDB cosine-similarity RAG engine with Gemini 2.5 Flash) and LightGBM static malware interception frameworks.",
-    "Published research on LLM adaptive temperature scaling (Springer) and dynamic decoding temperature prediction via transformer representations (+10.9% ROUGE-L, +5.7% BERTScore)."
+    "At SPIRE Lab, Indian Institute of Science (IISc), worked on Conformer-based speech models, Kannada regional dialect classification, and speech model quantization on the RESPIN corpus. Currently building and distilling a joint ASR-DID (Automatic Speech Recognition + Dialect Identification) pipeline that improves ASR capacity with dialect features — the model is built, and I am distilling parts of it to reduce inference time, parameters, and compute.",
+    "Built GenAI systems like FastRAG (asynchronous FastAPI + custom MongoDB cosine-similarity RAG engine with Gemini 2.5 Flash) and LightGBM static malware interception frameworks. Published research spanning quantum sensing (AVS Quantum Science, Q1, 2nd author), LLM hallucination mitigation (Springer Best Paper, ICAICS 2025), and adaptive decoding temperature prediction (+10.9% ROUGE-L, +5.7% BERTScore)."
   ],
   links: [
     { label: "Resume (PDF)", href: "https://drive.google.com/file/d/13hwt-WsrCPYg3-wtIhiW7TjfYfLpaM0C/view?usp=sharing", icon: "Resume" },

@@ -4,7 +4,7 @@ export const siteMeta = {
   description:
     "Personal technical site of Aditya S Maller: AI/ML Research Engineer working on Speech/Audio ML, Generative AI, Quantization, and High-Performance Systems.",
   socialDescription:
-    "AI/ML Research Engineer (SPIRE Lab - IISc). Machine Learning, Generative AI / LLMs, Speech & Audio Signal Processing, FastRAG, and Model Quantization.",
+    "AI/ML Research Engineer (SPIRE Lab - IISc). Conformer ASR & Kannada dialect modeling, joint ASR-DID distillation, Generative AI / LLMs, Speech Signal Processing, FastRAG, Model Quantization.",
   url: "https://aditya-maller.github.io/",
   image: "images/aditya-og.png",
   repositoryUrl: "https://github.com/Aditya-Maller/Aditya-Maller.github.io"
